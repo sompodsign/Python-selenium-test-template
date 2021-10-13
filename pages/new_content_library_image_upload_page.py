@@ -103,6 +103,6 @@ class ContentLibImageUpload(BasePage):
         time.sleep(2)
 
     def path(self):
-        print(os.path.abspath("../photos"))
+        print(os.path.abspath("../tests/photos"))
 # new = ContentLibImageUpload
 # new.input_image(1)

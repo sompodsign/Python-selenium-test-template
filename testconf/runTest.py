@@ -27,11 +27,11 @@ def readWrite(pathOfFile):
 readNewData = readWrite(pathOfNew)
 
 writetoToExcel()
-if (str(Test_data.TestCaseNumber.TotalData) == "suite2"):
+if str(Test_data.TestCaseNumber.TotalData) == "suite2":
     print("run2")
     command = "pytest --html=ReportHtml/report_" + time + "_" + readNewData + ".html --self-contained-html" + " " + "tests_2"
     os.system(command)
-elif (str(Test_data.TestCaseNumber.TotalData) == "suite1"):
+elif str(Test_data.TestCaseNumber.TotalData) == "suite1":
     print("run1")
     command = "pytest --html=ReportHtml/report_" + time + "_" + readNewData + ".html --self-contained-html" + " " + "tests"
     os.system(command)

@@ -1,8 +1,7 @@
 import os
 import sys
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import time
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from pages.companies_contact_page import CompaniesAndContactPage
 from pages.login_page import LoginPage
 from tests.base_test import BaseTest

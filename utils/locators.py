@@ -243,7 +243,7 @@ class ContentLib(object):
     sidebarMenu2 = (By.XPATH, "//div[@id='side-menu-left']")
     sidebarStatus = (By.XPATH, "//div[@id='pin']")
     pinMode = (By.XPATH, "//div[@id='pin']")
-    newFolder = (By.XPATH, "//tbody/tr[1]/td[2]/div[2]/div[3]/div[1]/div[1]/div[3]/a[1]/img[1]")
+    newFolder = (By.XPATH, "//tbody/tr/td[@id='pageContentMain']/div[@id='mainContentContainer']/div[@id='content']/div[@id='side-menu-left']/div[@class='catalog-menu-container']/div/a[@href='#']/img[1]")
     catlogName = (By.XPATH, "//input[@id='catalogName']")
     catDescription = (By.XPATH, "//textarea[@id='catalogDescription']")
     expirationDate = (By.XPATH, "//input[@id='catalogExpiration']")
@@ -253,8 +253,8 @@ class ContentLib(object):
 
 class contentLibraryImageUpload(object):
     searchBarField = (By.XPATH, "//input[@id='criteria']")
-    searchBtn = (By.XPATH, "//tbody/tr[1]/td[2]/div[2]/div[3]/div[1]/div[1]/div[2]/span[1]/a[1]/img[1]")
-    searchCatalog = (By.XPATH, "//tbody/tr[1]/td[2]/div[2]/div[3]/div[1]/div[1]/div[2]/span[1]/span[1]/span[2]")
+    searchBtn = (By.XPATH, '//img[@src="Images/futures/search24.png"]')
+    searchCatalog = (By.XPATH, "//span[@title='Search for catalogs.']")
     searchFolderFound = (By.XPATH,
                          "//body[1]/form[1]/div[4]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[2]/div[2]/div[3]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]")
     datasearchedFolder = (By.XPATH,
@@ -263,7 +263,7 @@ class contentLibraryImageUpload(object):
     searchedFolder = (By.XPATH,
                       "//a[@data-name='DemoData']")
 
-    uploadImageIcon = (By.XPATH, "//div[@id='uploadbar']")
+    uploadImageIcon = (By.CSS_SELECTOR, "#uploadbar")
 
     uploadInputBtn = (By.XPATH, "//input[@id='file-upload']")
 

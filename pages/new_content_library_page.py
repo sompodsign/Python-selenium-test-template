@@ -27,7 +27,7 @@ class ContentLib(BasePage):
         self.find_element(*self.locator.menu_option).click()
 
     def click_sidebar_menu(self):
-        if (self.isDisplayed(*self.locator.sidebarMenu2)):
+        if self.isDisplayed(*self.locator.sidebarMenu2):
             pass
         else:
             self.find_element(*self.locator.sidebarMenu).click()
