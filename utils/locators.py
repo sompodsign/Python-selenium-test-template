@@ -351,8 +351,9 @@ class addNewContactPageForReceivables(object):
     Savebtnfor2ndPage = (By.XPATH, "//input[@id='btnSave']")
 
     # fILLING UP IP
-    IpTab = (By.XPATH, '//div[@id="ctl00_TabsContent_t1"]')
-    addNewIp = (By.XPATH, "//div[@id='idAddNewLink']//a")
+    IpTab = (By.CSS_SELECTOR, '#ctl01_TabsContent_t1')
+    addNewIp = (By.XPATH, "/html/body/form/div[3]/div[1]/div[1]/a[1]")
+    # addNewIp = (By.XPATH, "//div[@id='idAddNewLink']//a")
 
     def selectIpName(ipname):
         ip_name = (By.XPATH, f'(//div[contains(text(),"{ipname}")])[1]/..//..//td//input')
@@ -364,8 +365,10 @@ class addNewContactPageForReceivables(object):
         selectRateType = (By.XPATH, f"//option[contains(text(),'{text}')]")
         return selectRateType
 
-    ipTabFrame = "ctl00_ContentPlaceHolder1_ifrmContr"
-    ipFormFrame = "ctl00_ContentPlaceHolder1_WndHostctrl1_ifrm"
+    ipTabFrame = "ctl01_ContentPlaceHolder1_ifrmContr"
+    # ipFormFrame = "ctl00_ContentPlaceHolder1_WndHostctrl1_ifrm"
+    ipFormFrame = "ctl01_ContentPlaceHolder1_WndHostctrl1_ifrm"
+
     saveIpForm = (By.XPATH, "//input[@id='btnSave']")
     tableRow = (By.XPATH, "//tbody/tr[starts-with(@id, 'gridIPs_row')]")
     # filling up product

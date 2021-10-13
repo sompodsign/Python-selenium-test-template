@@ -96,7 +96,8 @@ class addContract(BasePage):
         except:
             self.driver.execute_script("window.confirm = function(){return true;}")
         time.sleep(5)
-        self.driver.switch_to.frame("ctl00_ContentPlaceHolder1_ifrmContr")
+        # self.driver.switch_to.frame("ctl00_ContentPlaceHolder1_ifrmContr")
+        self.driver.switch_to.frame('ctl01_ContentPlaceHolder1_ifrmContr')
         time.sleep(4)
         self.selectCurrency(currency)
         time.sleep(4)
