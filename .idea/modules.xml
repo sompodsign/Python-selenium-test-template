@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/TestAutomation-release-27-AUGUST.iml" filepath="$PROJECT_DIR$/.idea/TestAutomation-release-27-AUGUST.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/python_selenium_test_template.iml" filepath="$PROJECT_DIR$/.idea/python_selenium_test_template.iml" />
     </modules>
   </component>
 </project>

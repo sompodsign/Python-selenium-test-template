@@ -9,6 +9,7 @@ import time
 import os
 from datetime import datetime
 
+
 def readWrite(pathOfFile):
     fileToRead = open(pathOfFile, 'r+')
     data = int(fileToRead.read())
@@ -28,15 +29,14 @@ def readWrite(pathOfFile):
     return readNewDatanum
 
 
-
-def sendMail(rreceiver, htmlPath, pdfPath,mail_content):
+def sendMail(rreceiver, htmlPath, pdfPath, mail_content):
     sender = 'Report.DsiDrm@gmail.com'
     receiver = rreceiver
     username = 'Report.DsiDrm@gmail.com'
     password = 'asdfghqwerty#12'
 
     # Email Subject
-    mail_title = 'Subject: Test Report at'+ str(datetime.now())
+    mail_title = 'Subject: Test Report at' + str(datetime.now())
 
     print("*" * 80)
     # print(PdfPath)

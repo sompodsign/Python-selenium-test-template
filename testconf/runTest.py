@@ -2,7 +2,7 @@ import pathlib
 from datetime import datetime
 import os
 from writeToExcel import writetoToExcel
-from utils import Test_data
+from utils import test_data_generate
 
 time = str(datetime.today().strftime('%Y-%m-%d'))
 print(time)

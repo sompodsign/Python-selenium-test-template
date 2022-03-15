@@ -67,7 +67,7 @@ def writetoToExcel():
         elif rolesForContact == roleLicensee:
             ExcelUtils.writeData(clientPath, sheetNameForContact, rowContact, 3, lastNameContactLicensee + " " + unique_id)
 
-        # if TestData.clientID == 2:
+        # if test_data.clientID == 2:
         if matchSubStringForLicensorCompany in hintOfUserCompany:
             for n in companyNameList:
                 if matchSubStringForLicensorCompany in n:

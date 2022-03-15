@@ -2,9 +2,10 @@ import os
 import sys
 import time
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from pages.companies_contact_page import CompaniesAndContactPage
-from pages.login_page import LoginPage
+from page_objects.companies_contact_page import CompaniesAndContactPage
+from page_objects.login_page import LoginPage
 from tests.base_test import BaseTest
+
 
 
 class TestAddCompanyInfo(BaseTest):
