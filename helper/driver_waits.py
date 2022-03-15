@@ -34,7 +34,7 @@ class DriverWaits:
         :return:
         """
         try:
-            Browser.get_wait(wait_time).until(EC.visibility_of_element_located(element));
+            Browser.get_wait(wait_time).until(EC.visibility_of_element_located(element))
             return True
         except Exception as e:
             print(e, "not found")
