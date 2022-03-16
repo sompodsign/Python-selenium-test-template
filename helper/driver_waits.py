@@ -1,7 +1,5 @@
-
 from selenium.webdriver.support import expected_conditions as EC
-
-from browser_utility.browser import Browser
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class DriverWaits:
@@ -12,8 +10,10 @@ class DriverWaits:
     def __init__(self, driver):
         self.driver = driver
 
-    @staticmethod
-    def explicit_wait(element, wait_time):
+    def get_wait(self, wait=10):
+        return WebDriverWait(self.driver, wait)
+
+    def explicit_wait(self, element, wait_time):
         """
         Wait until element is visible
         :param element:
@@ -21,12 +21,11 @@ class DriverWaits:
         :return:
         """
         try:
-            Browser.get_wait(wait_time).until(EC.presence_of_element_located(element))
+            self.get_wait(wait_time).until(EC.presence_of_element_located(element))
         except Exception as e:
             print(e, "not found")
 
-    @staticmethod
-    def wait_until_visible(wait_time, element):
+    def wait_until_visible(self, wait_time, element):
         """
         Wait until element is visible
         :param wait_time:
@@ -34,14 +33,13 @@ class DriverWaits:
         :return:
         """
         try:
-            Browser.get_wait(wait_time).until(EC.visibility_of_element_located(element))
+            self.get_wait(wait_time).until(EC.visibility_of_element_located(element))
             return True
         except Exception as e:
             print(e, "not found")
             return False
 
-    @staticmethod
-    def wait_till_completely_loaded(wait_time):
+    def wait_till_completely_loaded(self, wait_time):
         """
         Wait until the page is completely loaded
         :param wait_time:
@@ -49,9 +47,8 @@ class DriverWaits:
         """
         try:
             js = "return document.readyState"
-            Browser.get_wait(wait_time).until(lambda driver: driver.execute_script(js) == "complete")
+            self.get_wait(wait_time).until(lambda driver: driver.execute_script(js) == "complete")
             return True
         except Exception as e:
             print("Something went wrong: ", e)
             return False
-

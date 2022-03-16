@@ -1,6 +1,8 @@
 import os
 
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+
 from browser_utility.browser import Browser
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
@@ -12,13 +14,15 @@ class DriverActions:
     def __init__(self, driver):
         self.driver = driver
 
+    def get_wait(self, wait=10):
+        return WebDriverWait(self.driver, wait)
+
     def browser_back(self):
         self.driver.back()
 
-    @staticmethod
-    def scroll_to_web_element_with_javascript(element):
+    def scroll_to_web_element_with_javascript(self, element):
         try:
-            Browser.get_wait(2).until(EC.visibility_of(element))
+            self.get_wait(2).until(EC.visibility_of(element))
             return True
         except Exception as e:
             print("Element not found, ", e)
@@ -112,7 +116,7 @@ class DriverActions:
         """
         try:
             assert True if self.scroll_to_web_element_with_javascript(element) else "Unable to scroll to element"
-            Browser.get_wait(2).until(EC.visibility_of(element))
+            self.get_wait(2).until(EC.visibility_of(element))
             element.send_keys(Keys.CONTROL + "a")
             element.send_keys(Keys.DELETE)
             element.send_keys(text)
@@ -139,7 +143,7 @@ class DriverActions:
 
     def accept_browser_alert(self):
         try:
-            Browser.get_wait(1).until(EC.alert_is_present())
+            self.get_wait(1).until(EC.alert_is_present())
             self.driver.switch_to.alert.accept()
             self.driver.switch_to.default_content()
             return True
@@ -191,8 +195,7 @@ class DriverActions:
             print("Element not found, ", e)
             return False
 
-    @staticmethod
-    def wait_until_invisibility_of_element(element):
+    def wait_until_invisibility_of_element(self, element):
         """
         wait until element is invisible
         :param element:
@@ -200,7 +203,7 @@ class DriverActions:
         """
 
         try:
-            Browser.get_wait().until(EC.invisibility_of_element_located(element))
+            self.get_wait().until(EC.invisibility_of_element_located(element))
             return True
         except Exception as e:
             print("Element not found, ", e)
@@ -216,9 +219,9 @@ class DriverActions:
             if self.accept_browser_alert():
                 print("Alert is present")
                 try:
-                    Browser.get_wait(25).until(EC.visibility_of((By.CLASS_NAME, "modal-backdrop")))
+                    self.get_wait(25).until(EC.visibility_of((By.CLASS_NAME, "modal-backdrop")))
                 except Exception as e:
-                    print("")
+                    print(e)
             else:
                 print("Alert is not present")
             return True
@@ -242,15 +245,14 @@ class DriverActions:
             print("Element not found, ", e)
             return False
 
-    @staticmethod
-    def press_tab(element):
+    def press_tab(self, element):
         """
         Press tab key
         :param element:
         :return:
         """
         try:
-            Browser.get_wait(5).until(EC.visibility_of_element_located(element))
+            self.get_wait(5).until(EC.visibility_of_element_located(element))
             element.send_keys(Keys.TAB)
             return True
         except Exception as e:
@@ -269,7 +271,8 @@ class DriverActions:
         except Exception as e:
             print(e)
 
-    def upload_image(self, element, image_name):
+    @staticmethod
+    def upload_image(element, image_name):
         """
         This method will take image name age process it to get it's absolute path and then send it to file input
         :param element:

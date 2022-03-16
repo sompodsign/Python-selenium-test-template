@@ -11,7 +11,7 @@ class ApplicationSettings:
     # Environment details
     production_url = ""
     dev_url = ""
-    qa_url = "https://demoqa.com/"
+    qa_url = "https://new-qa.knights.app"
     dev_test_data_file_path = ""
     production_test_data_file_path = ""
     qa_test_data_file_path = ""
