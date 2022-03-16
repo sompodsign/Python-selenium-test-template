@@ -1,11 +1,11 @@
-from page_objects.home_page import HomePage
+from page_objects.login_page import LoginPage
 
 
 class PageFactory:
     def __init__(self, driver):
         self.driver = driver
 
-    def get_home_page(self):
-        return HomePage(self.driver)
+    def get_login_page(self):
+        return LoginPage(self.driver)
 
 
