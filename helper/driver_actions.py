@@ -20,15 +20,15 @@ class DriverActions:
     def browser_back(self):
         self.driver.back()
 
-    def scroll_to_web_element_with_javascript(self, element):
+    def scroll_to_web_element_with_javascript(self, *element):
         try:
-            self.get_wait(2).until(EC.visibility_of(element))
+            self.get_wait(2).until(EC.visibility_of(*element))
             return True
         except Exception as e:
             print("Element not found, ", e)
             return False
 
-    def click_on_web_element_with_actions_class(self, element):
+    def click_on_web_element_with_actions_class(self, *element):
         actions = ActionChains(self.driver)
         try:
             actions.move_to_element(element).click().perform()
@@ -117,10 +117,12 @@ class DriverActions:
         try:
             assert True if self.scroll_to_web_element_with_javascript(element) else "Unable to scroll to element"
             self.get_wait(2).until(EC.visibility_of(element))
-            element.send_keys(Keys.CONTROL + "a")
-            element.send_keys(Keys.DELETE)
-            element.send_keys(text)
+            el = self.driver.find_element(*element)
+            el.send_keys(Keys.CONTROL + "a")
+            el.send_keys(Keys.DELETE)
+            el.send_keys(text)
             return True
+
         except Exception as e:
             print("Element not found, ", e)
             return False
