@@ -8,9 +8,10 @@ from application_settings.application_settings import ApplicationSettings
 class Browser:
 
     web_driver = webdriver
+    application_settings = ApplicationSettings()
 
     def launch_browser(self):
-        browser_name = ApplicationSettings.get_browser_name()
+        browser_name = self.application_settings.get_browser_name()
         if browser_name == 'chrome':
             self.web_driver = webdriver.Chrome(ChromeDriverManager().install())
         elif browser_name == 'firefox':

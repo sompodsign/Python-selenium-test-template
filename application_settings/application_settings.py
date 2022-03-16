@@ -3,7 +3,7 @@ import datetime
 
 class ApplicationSettings:
     file_ext = ""
-    browser_name = ""
+    browser_name = "chrome"
     url = ""
     image_folder_path = ""
     start_time = datetime.datetime.now()
@@ -11,7 +11,7 @@ class ApplicationSettings:
     # Environment details
     production_url = ""
     dev_url = ""
-    qa_url = ""
+    qa_url = "https://demoqa.com/"
     dev_test_data_file_path = ""
     production_test_data_file_path = ""
     qa_test_data_file_path = ""
@@ -21,6 +21,9 @@ class ApplicationSettings:
 
     def get_url(self):
         return self.url
+
+    def get_qa_url(self):
+        return self.qa_url
 
     def get_image_folder_path(self):
         return self.image_folder_path

@@ -26,7 +26,7 @@ class userdefined:
 
             return readNewDatanum
 
-        counter = pathlib.Path(__file__).parent / "../testconf/counter.txt"
+        counter = pathlib.Path(__file__).parent / "../conf_test/counter.txt"
         data = readWrite(counter)
         oldnumber = os.listdir(os.path.abspath("photos"))
 

@@ -1,6 +1,6 @@
 import pathlib
 from utils import CompanyDataConfigForExcel
-from testconf import testData_configuration_for_run_test
+from conf_test import testData_configuration_for_run_test
 import utils.ExcelUtils
 from utils.ExcelUtils import *
 

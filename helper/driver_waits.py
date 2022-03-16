@@ -45,7 +45,7 @@ class DriverWaits:
         """
         Wait until the page is completely loaded
         :param wait_time:
-        :return:
+        :return: boolean
         """
         try:
             js = "return document.readyState"

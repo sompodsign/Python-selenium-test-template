@@ -7,7 +7,7 @@ from utils import ExcelUtils
 from utils.CompanyDataConfigForExcel import *
 import pathlib
 from uuid import uuid4
-from testconf.testData_configuration_for_run_test import File_Name_of_the_instance
+from conf_test.testData_configuration_for_run_test import File_Name_of_the_instance
 
 
 def writetoToExcel():
