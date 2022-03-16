@@ -7,6 +7,7 @@ class LoginPageTest(BaseTest):
 
     @allure.title("Login Page - smoke test")
     @allure.description("Check if login functionalities work properly")
+    @data("admin", "user")
     def test_login_functionality(self):
 
         login_page = self.page_factory.get_login_page()
