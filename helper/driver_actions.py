@@ -17,21 +17,24 @@ class DriverActions:
     def get_wait(self, wait=10):
         return WebDriverWait(self.driver, wait)
 
+    def find_element(self, *element):
+        return self.driver.find_element(*element)
+
     def browser_back(self):
         self.driver.back()
 
-    def scroll_to_web_element_with_javascript(self, *element):
+    def scroll_to_web_element_with_javascript(self, element):
         try:
-            self.get_wait(2).until(EC.visibility_of(*element))
+            self.get_wait(2).until(EC.visibility_of(self.driver.find_element(*element)))
             return True
         except Exception as e:
             print("Element not found, ", e)
             return False
 
-    def click_on_web_element_with_actions_class(self, *element):
+    def click_on_web_element_with_actions_class(self, element):
         actions = ActionChains(self.driver)
         try:
-            actions.move_to_element(element).click().perform()
+            actions.move_to_element(self.find_element(*element)).click().perform()
         except Exception as e:
             print("Element not found, ", e)
 
@@ -107,7 +110,7 @@ class DriverActions:
             print("Element not found, ", e)
             return False
 
-    def type_text(self, element, text):
+    def type_text(self, element, text=''):
         """
         :param element: WebElement to type text
         :param element:
@@ -116,7 +119,7 @@ class DriverActions:
         """
         try:
             assert True if self.scroll_to_web_element_with_javascript(element) else "Unable to scroll to element"
-            self.get_wait(2).until(EC.visibility_of(element))
+            self.get_wait(2).until(EC.visibility_of(self.find_element(*element)))
             el = self.driver.find_element(*element)
             el.send_keys(Keys.CONTROL + "a")
             el.send_keys(Keys.DELETE)
@@ -203,7 +206,6 @@ class DriverActions:
         :param element:
         :return:
         """
-
         try:
             self.get_wait().until(EC.invisibility_of_element_located(element))
             return True
@@ -321,6 +323,18 @@ class DriverActions:
         try:
             self.driver.execute_script("arguments[0].select();", element)
             self.driver.execute_script("document.execCommand('Paste');")
+            return True
+        except Exception as e:
+            print("Element not found, ", e)
+
+    def switch_to_frame(self, element):
+        """
+        This method will switch to frame
+        :param element:
+        :return:
+        """
+        try:
+            self.driver.switch_to.frame(self.driver.find_element(*element))
             return True
         except Exception as e:
             print("Element not found, ", e)

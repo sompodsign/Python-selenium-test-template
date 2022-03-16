@@ -36,7 +36,7 @@ class DriverWaits:
             self.get_wait(wait_time).until(EC.visibility_of_element_located(element))
             return True
         except Exception as e:
-            print(e, "not found")
+            print(e, "not found", element)
             return False
 
     def wait_till_completely_loaded(self, wait_time):

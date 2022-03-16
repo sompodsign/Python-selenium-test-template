@@ -17,9 +17,8 @@ class Browser:
         elif browser_name == 'firefox':
             self.web_driver = webdriver.Chrome(GeckoDriverManager().install())
 
-    @staticmethod
-    def get_wait(wait=10):
-        return WebDriverWait(webdriver, wait)
+    def get_wait(self, wait=10):
+        return WebDriverWait(self.web_driver, wait)
 
     def get_web_driver(self):
         return self.web_driver
