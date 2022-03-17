@@ -11,9 +11,11 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
         super().__init__(driver)
 
     def type_email(self, email):
+        print(f"Typing email: {email}")
         self.type_text(self.locator.EMAIL_FIELD, email)
 
     def type_password(self, password):
+        print(f"Typing password: {password}")
         self.type_text(self.locator.PASSWORD_FIELD, password)
 
     def switch_frame(self):
@@ -50,7 +52,7 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
             step += 1
             print(f"Step {step}: Switched driver to default content")
 
-            assert(self.click_login_button(), True)
+            assert self.click_login_button() is True
             step += 1
             print(f"Step {step}: Clicked on login button")
 

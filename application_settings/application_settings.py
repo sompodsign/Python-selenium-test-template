@@ -10,16 +10,16 @@ class ApplicationSettings:
     browser_name = "chrome"
     image_folder_path = None
     start_time = datetime.datetime.now()
-    configuration_file_path = "../conf_test/configuration.json"
+    configuration_file_path = "./conf_test/configuration.json"
 
     # Environment details
     environment_type = "qa"
     url = None
-    test_data_file_path = "../test_data/{}/test_data.xlsx".format(environment_type)
+    test_data_file_path = "./test_data/{}/test_data.xlsx".format(environment_type)
 
     def setUp(self, os="win", environment="qa"):
 
-        data_file = "../test_data/{}/test_data.xlsx".format(environment)
+        data_file = "./test_data/{}/test_data.xlsx".format(environment)
         data = read_data_from_excel(data_file, sheet_name="configuration")
 
         if os is not None and os.lower() == "win":

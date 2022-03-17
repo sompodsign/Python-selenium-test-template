@@ -33,8 +33,9 @@ class DriverActions:
 
     def click_on_web_element_with_actions_class(self, element):
         actions = ActionChains(self.driver)
+        assert self.scroll_to_web_element_with_javascript(element) is True, "Unable to scroll to element"
         try:
-            actions.move_to_element(self.find_element(*element)).click().perform()
+            actions.move_to_element(self.get_wait().until(EC.element_to_be_clickable(element))).click().perform()
             return True
         except Exception as e:
             print("Element not found, ", e)
@@ -212,7 +213,7 @@ class DriverActions:
             self.get_wait().until(EC.invisibility_of_element_located(element))
             return True
         except Exception as e:
-            print("Element not found, ", e)
+            print("Element was gone, ", e)
             return False
 
     def refresh_page(self):
@@ -341,3 +342,13 @@ class DriverActions:
         except Exception as e:
             print("Element not found, ", e)
             return False
+
+    def implicit_wait(self, time_in_seconds):
+        return self.driver.implicitly_wait(time_in_seconds)
+
+    def explicit_wait(self, time_in_seconds, element):
+        try:
+            return self.get_wait(time_in_seconds).until(EC.visibility_of(element))
+        except Exception as e:
+            print("Element not found, ", e)
+

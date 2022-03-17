@@ -35,8 +35,8 @@ class Browser:
         elif browser_name == 'opera':
             self.web_driver = webdriver.Opera(OperaDriverManager().install())
 
-    def get_wait(self, wait=10):
-        return WebDriverWait(self.web_driver, wait)
+    def get_wait(self):
+        return WebDriverWait(self.web_driver, 30)
 
     def get_web_driver(self):
         return self.web_driver
