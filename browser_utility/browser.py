@@ -11,11 +11,12 @@ class Browser:
     application_settings = ApplicationSettings()
 
     def launch_browser(self):
+        self.application_settings.setUp()
         browser_name = self.application_settings.get_browser_name()
         if browser_name == 'chrome':
             self.web_driver = webdriver.Chrome(ChromeDriverManager().install())
         elif browser_name == 'firefox':
-            self.web_driver = webdriver.Chrome(GeckoDriverManager().install())
+            self.web_driver = webdriver.Firefox(GeckoDriverManager().install())
 
     def get_wait(self, wait=10):
         return WebDriverWait(self.web_driver, wait)

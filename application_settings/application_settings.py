@@ -1,4 +1,5 @@
 import datetime
+from utils.ExcelUtils import get_data
 
 
 class ApplicationSettings:
@@ -14,7 +15,26 @@ class ApplicationSettings:
     qa_url = "https://new-qa.knights.app"
     dev_test_data_file_path = ""
     production_test_data_file_path = ""
-    qa_test_data_file_path = ""
+    qa_test_data_file_path = "../test_data/qa/dev_test_data.xlsx"
+    environment_type = ""
+
+    def setUp(self, os="win", browser="chrome", environment="qa"):
+        if os is not None and os.lower() == "win":
+            self.file_ext = ".exe"
+        else:
+            self.file_ext = ""
+
+        self.browser_name = browser
+
+        if environment.lower() == "production":
+            self.url = self.production_url
+            self.environment_type = "prod"
+        elif environment.lower() == "dev":
+            self.url = self.dev_url
+            self.environment_type = "dev"
+        elif environment.lower() == "qa":
+            self.url = self.qa_url
+            self.environment_type = "qa"
 
     def get_browser_name(self):
         return self.browser_name
@@ -42,3 +62,26 @@ class ApplicationSettings:
 
     def set_image_folder_path(self, image_folder_path):
         self.image_folder_path = image_folder_path
+
+    def get_test_data_file_path(self, environment):
+        if environment == "production":
+            return self.production_test_data_file_path
+        elif environment == "dev":
+            return self.dev_test_data_file_path
+        elif environment == "qa":
+            return self.qa_test_data_file_path
+
+    def get_test_data(self, environment):
+        file_path = self.get_test_data_file_path(environment)
+        return get_data(file_path)
+
+    @staticmethod
+    def get_login_credentials_table_name():
+        return "login"
+
+    @classmethod
+    def get_signup_data_table_name(cls):
+        return "signup"
+
+    def print_details(self):
+        print(self.url, self.environment_type, self.browser_name)
