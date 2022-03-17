@@ -1,19 +1,19 @@
 import datetime
-from utils.ExcelUtils import read_data_from_excel
+from utils.ExcelUtils import read_data_from_excel, read_data_from_excel_by_row
 
 
 class ApplicationSettings:
     """
     This class is used to store the application settings.
     """
-    file_ext = None
-    browser_name = None
+    file_ext = ".exe"
+    browser_name = "chrome"
     image_folder_path = None
     start_time = datetime.datetime.now()
     configuration_file_path = "../conf_test/configuration.json"
 
     # Environment details
-    environment_type = None
+    environment_type = "qa"
     url = None
     test_data_file_path = "../test_data/{}/test_data.xlsx".format(environment_type)
 
@@ -31,16 +31,6 @@ class ApplicationSettings:
 
         self.environment_type = environment
         self.url = data['base_URL']
-
-        # if environment.lower() == "production":
-        #     self.url = self.production_url
-        #     self.environment_type = "prod"
-        # elif environment.lower() == "dev":
-        #     self.url = self.dev_url
-        #     self.environment_type = "dev"
-        # elif environment.lower() == "qa":
-        #     self.url = self.qa_url
-        #     self.environment_type = "qa"
 
     def get_browser_name(self):
         return self.browser_name.lower()
@@ -66,17 +56,8 @@ class ApplicationSettings:
     def set_image_folder_path(self, image_folder_path):
         self.image_folder_path = image_folder_path
 
-    def get_test_data_file_path(self, environment):
-        if environment == "production":
-            return self.test_data_file_path
-        elif environment == "dev":
-            return self.test_data_file_path
-        elif environment == "qa":
-            return self.test_data_file_path
-
-    def get_test_data(self, environment):
-        file_path = self.get_test_data_file_path(environment)
-        return read_data_from_excel(file_path)
+    def get_test_data_from_excel(self, sheet_name, table_name):
+        return read_data_from_excel_by_row(self.test_data_file_path, sheet_name, table_name)
 
     @staticmethod
     def get_login_credentials_table_name():
