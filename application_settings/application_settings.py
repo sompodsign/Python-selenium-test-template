@@ -72,3 +72,4 @@ class ApplicationSettings:
 
     def print_details(self):
         return self.url, self.browser_name, self.environment_type
+

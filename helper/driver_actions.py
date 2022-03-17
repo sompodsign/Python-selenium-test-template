@@ -35,8 +35,10 @@ class DriverActions:
         actions = ActionChains(self.driver)
         try:
             actions.move_to_element(self.find_element(*element)).click().perform()
+            return True
         except Exception as e:
             print("Element not found, ", e)
+            return False
 
     def click_on_web_element_with_actions_class_with_offset(self, element, x_offset, y_offset):
         """
@@ -338,3 +340,4 @@ class DriverActions:
             return True
         except Exception as e:
             print("Element not found, ", e)
+            return False

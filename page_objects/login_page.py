@@ -1,4 +1,3 @@
-
 from page_objects.base_page import BasePage
 from helper.driver_actions import DriverActions
 from helper.driver_waits import DriverWaits
@@ -24,7 +23,7 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
         self.click_on_web_element_with_actions_class(self.locator.CAPTCHA_CHECK_BOX)
 
     def click_login_button(self):
-        self.click_on_web_element_with_actions_class(self.locator.LOGIN_BUTTON)
+        return self.click_on_web_element_with_actions_class(self.locator.LOGIN_BUTTON)
 
     def login(self, email_text, password_text):
 
@@ -51,7 +50,7 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
             step += 1
             print(f"Step {step}: Switched driver to default content")
 
-            self.click_login_button()
+            assert(self.click_login_button(), True)
             step += 1
             print(f"Step {step}: Clicked on login button")
 
@@ -64,4 +63,3 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
         except Exception as e:
             print(e)
             return False
-
