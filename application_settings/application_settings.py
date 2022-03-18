@@ -1,7 +1,4 @@
 import datetime
-import glob
-import os
-
 from utils.ExcelUtils import read_data_from_excel, read_data_from_excel_by_row
 
 
@@ -33,7 +30,7 @@ class ApplicationSettings:
         self.browser_name = data['browser']
 
         self.environment_type = environment
-        self.url = data['base_URL']
+        self.url = data['frontend_url']
 
     def get_browser_name(self):
         return self.browser_name.lower()
