@@ -1,5 +1,5 @@
 import datetime
-from utils.ExcelUtils import read_data_from_excel, read_data_from_excel_by_row
+from utils.excel_utils import read_data_from_excel, read_data_from_excel_by_row
 
 
 class ApplicationSettings:

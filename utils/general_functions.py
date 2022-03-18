@@ -2,8 +2,10 @@ import glob
 import os
 from datetime import datetime
 
-
 # Read current date
+import pdfkit
+
+
 def read_date():
     return str(datetime.today().strftime('%Y-%m-%d'))
 
@@ -29,3 +31,10 @@ def get_html_report():
     except Exception as e:
         print("Report not ready, Error", e)
         return False
+
+
+def html_to_pdf(read_new_data_1, time1):
+    read_new_data = str(read_new_data_1)
+    time = str(time1)
+    html_path = os.getcwd() + "/ReportHtml/report_" + time + "_" + read_new_data + ".html"
+    pdfkit.from_file(html_path, "report_" + time + "_" + read_new_data + ".pdf")
