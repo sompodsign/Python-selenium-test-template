@@ -1,6 +1,6 @@
 import requests
 import json
-from api.config import constData
+from conf_test.conf_api_test.config import constData
 
 
 class BaseApi(object):

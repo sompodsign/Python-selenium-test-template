@@ -1,5 +1,5 @@
 import requests
-from api.base_requests import BaseApi
+from conf_test.conf_api_test.base_requests import BaseApi
 
 
 class Api(BaseApi):

@@ -1,6 +1,6 @@
 import allure
 import pytest
-from tests.base_test import BaseTest
+from test_cases.ui_test_cases.base_test import BaseTest
 from application_settings.application_settings import ApplicationSettings
 
 pytest.mark.usefixtures("setup")

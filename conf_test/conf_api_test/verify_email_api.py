@@ -1,16 +1,15 @@
+from conf_test.conf_api_test.base_requests import BaseApi
 
-from api.base_requests import BaseApi
 
-
-class VerifyApi(BaseApi):
+class VerifyEmailApi(BaseApi):
 
     def __init__(self, url):
         super().__init__(url)
 
-    def send_otp(self, payload, headers=None):
-        return self.post_request(payload, headers)
+    def send_otp(self, payload):
+        return self.post_request(payload)
 
-    def send(self, payload, headers=None):
+    def sign_in_user(self, payload, headers=None):
         return self.post_request(payload, headers)
 
     def get_user_list(self):
@@ -28,3 +27,5 @@ class VerifyApi(BaseApi):
     def delete_user(self):
         return self.delete_request()
 
+    def sign_up_with_put(self, payload):
+        return self.put_request(payload=payload)

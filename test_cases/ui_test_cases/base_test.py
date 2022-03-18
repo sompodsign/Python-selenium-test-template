@@ -4,7 +4,7 @@ import unittest
 from browser_utility.browser import Browser
 from pages.page_factory import PageFactory
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(os.path.join(os.path.dirname(__file__), "../.."))
 
 
 class BaseTest(unittest.TestCase):
