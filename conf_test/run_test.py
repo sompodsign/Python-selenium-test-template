@@ -11,13 +11,13 @@ command = f"pytest -s --alluredir=report_allure/{report_folder_name} " \
 subprocess.run(command, shell=True)
 
 # send report if generated
-# html_report = get_html_report()
-# if html_report:
-#     print("Sending report...")
-#     report = html_report
-#     send_report("sompod123@gmail.com", report)
-# else:
-#     print("Something went wrong while generating html report.")
+html_report = get_html_report()
+if html_report:
+    print("Sending report...")
+    report = html_report
+    send_report("sompod123@gmail.com", report)
+else:
+    print("Something went wrong while generating html report.")
 
 ## allure serve
 # command = f"allure serve report_allure/{report_folder_name}"
