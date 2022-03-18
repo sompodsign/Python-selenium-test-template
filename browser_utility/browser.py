@@ -4,18 +4,35 @@ from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import IEDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.opera import OperaDriverManager
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from application_settings.application_settings import ApplicationSettings
 from utils.json_utils import json_reader
+from utils.ExcelUtils import read_data_from_excel
 
 
 class Browser:
-
     web_driver = webdriver
     application_settings = ApplicationSettings()
     data = json_reader(application_settings.get_configuration_file_path())
+    configuration_data = read_data_from_excel(application_settings.get_test_data_file_path(), sheet_name="configuration")
+    headless = "headless" if configuration_data["headless"] == "yes" else "headful"
 
     environment = data['settings']['environmentType']
+
+    options = Options()
+
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument(f"--{headless}")
+    options.add_argument("--test-type")
+    options.add_argument("--ignore-certificate-errors")
+    options.add_argument("--disable-popup-blocking")
+    options.add_argument("--disable-translate")
+    options.experimental_options["prefs"] = {
+        "logging.browser.enable": "false"}
 
     def launch_browser(self):
         """
@@ -25,15 +42,17 @@ class Browser:
         self.application_settings.setUp(environment=self.environment)
         browser_name = self.application_settings.get_browser_name()
         if browser_name == 'chrome':
-            self.web_driver = webdriver.Chrome(ChromeDriverManager().install())
+            self.web_driver = webdriver.Chrome(ChromeDriverManager().install(), options=self.options)
         elif browser_name == 'firefox':
             self.web_driver = webdriver.Firefox(GeckoDriverManager().install())
         elif browser_name == 'ie':
             self.web_driver = webdriver.Ie(IEDriverManager().install())
         elif browser_name == 'edge':
-            self.web_driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+            self.web_driver = webdriver.Edge(
+                executable_path=EdgeChromiumDriverManager().install())
         elif browser_name == 'opera':
-            self.web_driver = webdriver.Opera(OperaDriverManager().install())
+            self.web_driver = webdriver.Opera(
+                executable_path=OperaDriverManager().install(), )
 
     def get_wait(self):
         return WebDriverWait(self.web_driver, 30)

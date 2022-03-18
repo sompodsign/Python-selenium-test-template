@@ -14,8 +14,8 @@ class BaseTest(unittest.TestCase):
 
     def setUp(self):
         self.browser.launch_browser()
-        self.browser.go_to_url()
         self.browser.maximize_browser()
+        self.browser.go_to_url()
         self.driver = self.browser.get_web_driver()
         self.page_factory = PageFactory(self.driver)
 

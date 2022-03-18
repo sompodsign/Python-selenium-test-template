@@ -1,9 +1,10 @@
 import os
+import time
 
+from selenium.common.exceptions import ElementNotVisibleException, ElementNotSelectableException, \
+    StaleElementReferenceException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
-
-from browser_utility.browser import Browser
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
@@ -15,7 +16,9 @@ class DriverActions:
         self.driver = driver
 
     def get_wait(self, wait=10):
-        return WebDriverWait(self.driver, wait)
+        return WebDriverWait(self.driver, wait, poll_frequency=1,
+                             ignored_exceptions=[ElementNotVisibleException, ElementNotSelectableException,
+                                                 StaleElementReferenceException])
 
     def find_element(self, *element):
         return self.driver.find_element(*element)
@@ -31,11 +34,34 @@ class DriverActions:
             print("Element not found, ", e)
             return False
 
+    # def click_on_web_element_with_actions_class(self, element, retry=1):
+    #     sleep_amount = 0
+    #     if retry > 1:
+    #         sleep_amount = 1
+    #     for _ in range(retry):
+    #         time.sleep(sleep_amount)
+    #         actions = ActionChains(self.driver)
+    #         assert self.scroll_to_web_element_with_javascript(element) is True, "Unable to scroll to element"
+    #         try:
+    #             actions.move_to_element(self.get_wait(2)
+    #                                     .until(EC.element_to_be_clickable(element))).click().perform()
+    #             return True
+    #         except Exception as e:
+    #             print("Element not found, ", e)
+    #             return False
+
     def click_on_web_element_with_actions_class(self, element):
+
         actions = ActionChains(self.driver)
         assert self.scroll_to_web_element_with_javascript(element) is True, "Unable to scroll to element"
         try:
-            actions.move_to_element(self.get_wait().until(EC.element_to_be_clickable(element))).click().perform()
+            actions.move_to_element(self.get_wait(2)
+                                    .until(EC.element_to_be_clickable(element))).click().perform()
+            if self.accept_browser_alert():
+                print("Alert is present.")
+            else:
+                print("Alert is absent.")
+
             return True
         except Exception as e:
             print("Element not found, ", e)
@@ -346,9 +372,12 @@ class DriverActions:
     def implicit_wait(self, time_in_seconds):
         return self.driver.implicitly_wait(time_in_seconds)
 
+    @staticmethod
+    def implicit_wait_time(time_in_seconds):
+        return time.sleep(time_in_seconds)
+
     def explicit_wait(self, time_in_seconds, element):
         try:
             return self.get_wait(time_in_seconds).until(EC.visibility_of(element))
         except Exception as e:
             print("Element not found, ", e)
-

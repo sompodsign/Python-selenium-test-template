@@ -1,4 +1,7 @@
 import datetime
+import glob
+import os
+
 from utils.ExcelUtils import read_data_from_excel, read_data_from_excel_by_row
 
 
@@ -73,3 +76,5 @@ class ApplicationSettings:
     def print_details(self):
         return self.url, self.browser_name, self.environment_type
 
+    def get_test_data_file_path(self):
+        return self.test_data_file_path

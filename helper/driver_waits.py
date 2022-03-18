@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -52,3 +54,7 @@ class DriverWaits:
         except Exception as e:
             print("Something went wrong: ", e)
             return False
+
+    @staticmethod
+    def implicit_wait(wait_time):
+        time.sleep(wait_time)
