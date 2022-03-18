@@ -381,3 +381,7 @@ class DriverActions:
             return self.get_wait(time_in_seconds).until(EC.visibility_of(element))
         except Exception as e:
             print("Element not found, ", e)
+
+    # scroll page to amount of pages
+    def scroll_page_to_amount(self, amount):
+        self.driver.execute_script("window.scrollBy(0, " + str(amount) + ");")
