@@ -19,6 +19,6 @@ subprocess.run(command, shell=True)
 # else:
 #     print("Something went wrong while generating html report.")
 
-# allure serve
+## allure serve
 # command = f"allure serve report_allure/{report_folder_name}"
 # subprocess.run(command, shell=True)
