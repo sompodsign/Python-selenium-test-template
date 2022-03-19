@@ -13,6 +13,7 @@ configuration_data = read_data_from_excel("./test_data/{}_test_data.xlsx".format
                                           sheet_name="configuration")
 parallel = configuration_data["parallel_run"]
 
+
 report_folder_name = f"{read_date()}_{read_date()}_{read_time()}"
 
 # Individually will run each test case
@@ -23,10 +24,12 @@ individual_run_command = f"pytest -s --alluredir=report_allure/{report_folder_na
 parallel_run_command = f"pytest -s -n auto --alluredir=report_allure/{report_folder_name} " \
                        f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests"
 
+
 if parallel == "yes":
     subprocess.run(parallel_run_command, shell=True)
 else:
     subprocess.run(individual_run_command, shell=True)
+
 
 # send report if generated
 html_report = get_html_report()
@@ -36,6 +39,7 @@ if html_report:
     send_report("sompod123@gmail.com", report)
 else:
     print("Something went wrong while generating html report.")
+
 
 ## allure serve
 # command = f"allure serve report_allure/{report_folder_name}"
