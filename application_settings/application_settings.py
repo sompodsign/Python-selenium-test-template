@@ -73,8 +73,5 @@ class ApplicationSettings:
     def get_configuration_file_path(self):
         return self.configuration_file_path
 
-    def print_details(self):
-        return self.url, self.browser_name, self.environment_type
-
     def get_test_data_file_path(self):
         return self.test_data_file_path
