@@ -3,31 +3,32 @@ import time
 from page_objects.base_page import BasePage
 from helper.driver_actions import DriverActions
 from helper.driver_waits import DriverWaits
-from locators.locators import LoginPageLocators
+from locators.locators import LoginPageLocators, HomePageLocators
 
 
 class LoginPage(BasePage, DriverActions, DriverWaits):
 
     def __init__(self, driver):
-        self.locator = LoginPageLocators
+        self.login_page_locator = LoginPageLocators
+        self.home_page_locator = HomePageLocators
         super().__init__(driver)
 
     def type_email(self, email):
         print(f"Typing email: {email}")
-        self.type_text(self.locator.EMAIL_FIELD, email)
+        self.type_text(self.login_page_locator.EMAIL_FIELD, email)
 
     def type_password(self, password):
         print(f"Typing password: {password}")
-        self.type_text(self.locator.PASSWORD_FIELD, password)
+        self.type_text(self.login_page_locator.PASSWORD_FIELD, password)
 
     def switch_frame(self):
-        self.switch_to_frame(self.locator.CAPTCHA_FRAME)
+        self.switch_to_frame(self.login_page_locator.CAPTCHA_FRAME)
 
     def click_check_box(self):
-        self.click_on_web_element_with_actions_class(self.locator.CAPTCHA_CHECK_BOX)
+        self.click_on_web_element_with_actions_class(self.login_page_locator.CAPTCHA_CHECK_BOX)
 
     def click_login_button(self):
-        self.click_on_web_element_with_actions_class(self.locator.LOGIN_BUTTON)
+        self.click_on_web_element_with_actions_class(self.login_page_locator.LOGIN_BUTTON)
 
     def login(self, email_text, password_text):
 
@@ -60,7 +61,7 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
             step += 1
             print(f"Step {step}: Clicked on login button")
 
-            assert self.wait_until_invisibility_of_element(self.locator.LOGIN_BUTTON) is True
+            assert self.wait_until_invisibility_of_element(self.login_page_locator.LOGIN_BUTTON) is True
             step += 1
             print(f"Step {step}: Login button is gone")
 
@@ -69,3 +70,6 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
         except Exception as e:
             print(e)
             return False
+
+    def test_homepage(self):
+        return True if self.wait_until_visible(30, self.home_page_locator.WELCOME_MESSAGE) is True else False

@@ -1,7 +1,8 @@
 import subprocess
-from utils.general_functions import read_date, read_time
+import sys
+
+from utils.general_functions import read_date, read_time, get_html_report
 from send_mail import send_report
-from utils.general_functions import get_html_report
 
 report_folder_name = f"{read_date()}_{read_date()}_{read_time()}"
 

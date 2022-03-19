@@ -7,3 +7,7 @@ class LoginPageLocators:
     CAPTCHA_FRAME = (By.XPATH, "//iframe[@title='reCAPTCHA']")
     LOGIN_BUTTON = (By.XPATH, "//button[contains(text(),'Sign In')]")
     CAPTCHA_CHECK_BOX = (By.XPATH, "//*[@id=\"recaptcha-anchor\"]/div[1]")
+
+
+class HomePageLocators:
+    WELCOME_MESSAGE = (By.XPATH, "//h5[normalize-space()='Unidevgo Test']")

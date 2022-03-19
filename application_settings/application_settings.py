@@ -33,7 +33,7 @@ class ApplicationSettings:
         self.browser_name = data['browser']
 
         self.environment_type = environment
-        self.url = data['base_URL']
+        self.url = data['frontend_url']
 
     def get_browser_name(self):
         return self.browser_name.lower()
