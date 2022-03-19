@@ -25,6 +25,6 @@ six==1.16.0
 toml==0.10.2
 urllib3==1.26.7
 webdriver-manager==3.5.0
-
+requests
 ddt~=1.4.4
 pandas~=1.4.1
