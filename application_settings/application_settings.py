@@ -18,11 +18,11 @@ class ApplicationSettings:
     # Environment details
     environment_type = "qa"
     url = None
-    test_data_file_path = "./test_data/{}/test_data.xlsx".format(environment_type)
+    test_data_file_path = "./test_data/{}_test_data.xlsx".format(environment_type)
 
     def setUp(self, os="win", environment="qa"):
 
-        data_file = "./test_data/{}/test_data.xlsx".format(environment)
+        data_file = "./test_data/{}_test_data.xlsx".format(environment)
         data = read_data_from_excel(data_file, sheet_name="configuration")
 
         if os is not None and os.lower() == "win":
