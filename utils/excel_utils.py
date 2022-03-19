@@ -47,3 +47,13 @@ def read_data_from_excel_by_row(file, sheet_name, row_value):
             for cell in row:
                 data.append(cell.value)
     return tuple(data[1:])
+
+
+# update a single excel column value
+def update_excel_column_value(file, sheet_name, column_name, new_value):
+    workbook = openpyxl.load_workbook(file)
+    sheet = workbook[sheet_name]
+    for row in sheet.iter_rows():
+        if row[0].value == column_name:
+            row[1].value = new_value
+    workbook.save(file)
