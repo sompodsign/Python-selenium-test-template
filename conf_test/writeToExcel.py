@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from utils import ExcelUtils
+from utils import excel_utils
 from utils.CompanyDataConfigForExcel import *
 import pathlib
 from uuid import uuid4

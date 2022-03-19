@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from application_settings.application_settings import ApplicationSettings
 from utils.json_utils import json_reader
-from utils.ExcelUtils import read_data_from_excel
+from utils.excel_utils import read_data_from_excel
 
 
 class Browser:
@@ -75,3 +75,4 @@ class Browser:
     def accept_alert(self):
         self.web_driver.switch_to.alert.accept()
         self.web_driver.switch_to.default_content()
+

@@ -1,8 +1,10 @@
 import subprocess
 import sys
-
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from utils.general_functions import read_date, read_time, get_html_report
 from send_mail import send_report
+
 
 report_folder_name = f"{read_date()}_{read_date()}_{read_time()}"
 
