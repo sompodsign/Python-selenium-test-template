@@ -8,14 +8,14 @@ import os
 from datetime import datetime
 
 #TODO: receive project name as parameter
-def send_report(receiver_email, reports):
+def send_report(receiver_email, reports, project_name):
     sender = 'sompodsrkr@gmail.com'
     receiver = receiver_email
 
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Email Subject
-    mail_title = 'Test Report at ' + str(current_time)
+    mail_title = f'Test Report of {project_name} ' + str(current_time)
 
     print("*" * 80)
     mail_body = "Here is the report for the test run at " + str(current_time) + "\n\n"

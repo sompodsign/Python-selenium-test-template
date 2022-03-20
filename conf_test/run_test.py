@@ -89,7 +89,7 @@ elif test_item == "both":
 # send report if generated
 html_reports = get_html_reports(test_item)
 
-send_report("sompod123@gmail.com", html_reports)
+send_report("sompod123@gmail.com", html_reports, "Meta-Race")
 
 # allure report serve
 # ui_allure_serve_command = f"allure serve reports/{test_item}_report_allure/{report_file_name_prefix}"
