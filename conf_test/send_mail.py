@@ -7,7 +7,7 @@ import datetime
 import os
 from datetime import datetime
 
-
+#TODO: receive project name as parameter
 def send_report(receiver_email, reports):
     sender = 'sompodsrkr@gmail.com'
     receiver = receiver_email
