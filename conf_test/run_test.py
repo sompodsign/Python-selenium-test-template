@@ -5,54 +5,101 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from utils.excel_utils import read_data_from_excel
 from utils.json_utils import json_reader
-from utils.general_functions import read_date, read_time, get_html_report
+from utils.general_functions import read_date, read_time, get_html_reports
 from send_mail import send_report
 
 test_environment_type = json_reader("conf_test/configuration.json")['settings']["environmentType"]
 configuration_data = read_data_from_excel("./test_data/{}_test_data.xlsx".format(test_environment_type),
                                           sheet_name="configuration")
 parallel = configuration_data["parallel_run"]
-test_item = configuration_data["test_item"]
+test_item = configuration_data["test_item"].casefold()
 
-report_folder_name = f"{read_date()}_{read_date()}_{read_time()}"
+ui_report_file_name_prefix = f"{'ui' if test_item == 'both' else test_item}_{read_date()}_{read_date()}_{read_time()}"
+api_report_file_name_prefix = f"{'api' if test_item == 'both' else test_item}_{read_date()}_{read_date()}_{read_time()}"
 
 # Individually will run each test case
-individual_ui_run_command = f"pytest -s --alluredir=report_allure/{report_folder_name} " \
-                            f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests/ui_testcases"
+individual_ui_run_command = f"pytest -s --alluredir=reports/{'ui' if test_item == 'both' else test_item}_report_allure/{ui_report_file_name_prefix} " \
+                            f"--html=reports/{'ui' if test_item == 'both' else test_item}_report_html/report_{ui_report_file_name_prefix}.html --self-contained-html tests/ui_testcases"
 
 # Individually will run each api test case
-individual_api_run_command = f"pytest -s --alluredir=report_allure/{report_folder_name} " \
-                             f"--html=api_report_html/report_{report_folder_name}.html --self-contained-html tests/api_testcases"
+individual_api_run_command = f"pytest -s --alluredir=reports/{'api' if test_item == 'both' else test_item}_report_allure/{api_report_file_name_prefix} " \
+                             f"--html=reports/{'api' if test_item == 'both' else test_item}_report_html/report_{api_report_file_name_prefix}.html --self-contained-html tests/api_testcases"
 
 # Test cases will run based on the amount of threads available
-parallel_ui_run_command = f"pytest -s -n auto --alluredir=report_allure/{report_folder_name} " \
-                          f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests/ui_testcases"
+parallel_ui_run_command = f"pytest -s -n auto --alluredir=reports/{'ui' if test_item == 'both' else test_item}_report_allure/{ui_report_file_name_prefix} " \
+                          f"--html=reports/{'ui' if test_item == 'both' else test_item}_report_html/report_{ui_report_file_name_prefix}.html --self-contained-html tests/ui_testcases"
 
 # Test cases will run based on the amount of threads available
-parallel_api_run_command = f"pytest -s -n auto --alluredir=report_allure/{report_folder_name} " \
-                           f"--html=api_report_html/report_{report_folder_name}.html --self-contained-html tests/api_testcases"
+parallel_api_run_command = f"pytest -s -n auto --alluredir=reports/{'api' if test_item == 'both' else test_item}_report_allure/{api_report_file_name_prefix} " \
+                           f"--html=reports/{'api' if test_item == 'both' else test_item}_report_html/report_{api_report_file_name_prefix}.html --self-contained-html tests/api_testcases"
 
-if parallel == "yes" and test_item == "ui":
-    subprocess.run(parallel_ui_run_command, shell=True)
-elif parallel == "yes" and test_item == "api":
-    subprocess.run(parallel_api_run_command, shell=True)
-elif test_item == "ui" and parallel == "no":
+
+def run_api_and_ui_testcases():
+    """
+    Run the test cases based on the test item sequentially
+    :return:
+    """
+    subprocess.run(individual_api_run_command, shell=True)
     subprocess.run(individual_ui_run_command, shell=True)
-else:
+
+
+def parallel_ui_testcases_run():
+    """
+    Run the test cases based on the test item in parallel
+    :return:
+    """
+    subprocess.run(parallel_ui_run_command, shell=True)
+
+
+def parallel_api_testcases_run():
+    """
+    Run the test cases based on the test item in parallel
+    :return:
+    """
+    subprocess.run(parallel_api_run_command, shell=True)
+
+
+def individual_ui_testcases_run():
+    """
+    Run the test cases based on the test item sequentially
+    :return:
+    """
+    subprocess.run(individual_ui_run_command, shell=True)
+
+
+def individual_api_testcases_run():
+    """
+    Run the test cases based on the test item sequentially
+    :return:
+    """
     subprocess.run(individual_api_run_command, shell=True)
 
+
+if parallel == "yes" and test_item == "ui":
+    parallel_ui_testcases_run()
+elif parallel == "yes" and test_item == "api":
+    parallel_api_testcases_run()
+elif test_item == "ui" and parallel == "no":
+    individual_ui_testcases_run()
+elif test_item == "api" and parallel == "no":
+    individual_api_testcases_run()
+elif test_item == "both":
+    run_api_and_ui_testcases()
+
 # send report if generated
-html_report = get_html_report(test_item)
-if html_report:
-    print("Sending report...")
-    report = html_report
+html_reports = get_html_reports(test_item)
+for report in html_reports:
     send_report("sompod123@gmail.com", report)
-else:
-    print("Something went wrong while generating html report.")
+# if html_report:
+#     print("Sending report...")
+#     report = html_report
+#     send_report("sompod123@gmail.com", report)
+# else:
+#     print("Something went wrong while generating html report.")
 
 # allure report serve
-# ui_allure_serve_command = f"allure serve report_allure/{report_folder_name}"
-# api_allure_serve_command = f"allure serve api_report_allure/{report_folder_name}"
+# ui_allure_serve_command = f"allure serve reports/{test_item}_report_allure/{report_file_name_prefix}"
+# api_allure_serve_command = f"allure serve reports/{test_item}_report_allure/{report_file_name_prefix}"
 #
 # if test_item == "ui":
 #     subprocess.run(ui_allure_serve_command, shell=True)

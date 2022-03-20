@@ -22,15 +22,20 @@ def read_time():
     return str(datetime.today().strftime('%H-%M-%S'))
 
 
-def get_html_report(report_type):
-    directory = None
-    if report_type == 'ui':
-        directory = ''
-    elif report_type == 'api':
-        directory = 'api_report_html'
-    try:
-        report = os.path.abspath(glob.glob(f"{directory}report_html/*.html")[-1])
-        return report
-    except Exception as e:
-        print("Report not ready, Error", e)
-        return False
+def get_html_reports(report_type):
+    reports = []
+    if not report_type == "both":
+        try:
+            report = os.path.abspath(glob.glob(f"reports/{report_type}_report_html/*.html")[-1])
+            reports.append(report)
+        except Exception as e:
+            print("Report not ready, Error", e)
+    else:
+        try:
+            report1 = os.path.abspath(glob.glob(f"reports/api_report_html/*.html")[-1])
+            report2 = os.path.abspath(glob.glob(f"reports/ui_report_html/*.html")[-1])
+            reports.append(report1)
+            reports.append(report2)
+        except Exception as e:
+            print("Reports are not ready, Error", e)
+    return reports
