@@ -4,6 +4,7 @@ from page_objects.base_page import BasePage
 from helper.driver_actions import DriverActions
 from helper.driver_waits import DriverWaits
 from locators.locators import LoginPageLocators, HomePageLocators
+from helper.webdriver_listener import WebDriverListener
 
 
 class LoginPage(BasePage, DriverActions, DriverWaits):
@@ -11,10 +12,12 @@ class LoginPage(BasePage, DriverActions, DriverWaits):
     def __init__(self, driver):
         self.login_page_locator = LoginPageLocators
         self.home_page_locator = HomePageLocators
+        self.webdriver_listener = WebDriverListener()
         super().__init__(driver)
 
     def type_email(self, email):
-        print(f"Typing email: {email}")
+        # print(f"Typing email: {email}")
+        self.webdriver_listener.before_change_value_of(self.driver.find_element(*self.login_page_locator.EMAIL_FIELD), self.driver)
         self.type_text(self.login_page_locator.EMAIL_FIELD, email)
 
     def type_password(self, password):

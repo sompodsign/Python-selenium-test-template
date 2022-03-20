@@ -18,19 +18,19 @@ report_folder_name = f"{read_date()}_{read_date()}_{read_time()}"
 
 # Individually will run each test case
 individual_ui_run_command = f"pytest -s --alluredir=report_allure/{report_folder_name} " \
-                            f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests"
+                            f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests/ui_testcases"
 
 # Individually will run each api test case
 individual_api_run_command = f"pytest -s --alluredir=report_allure/{report_folder_name} " \
-                             f"--html=api_report_html/report_{report_folder_name}.html --self-contained-html api_tests"
+                             f"--html=api_report_html/report_{report_folder_name}.html --self-contained-html tests/api_testcases"
 
 # Test cases will run based on the amount of threads available
 parallel_ui_run_command = f"pytest -s -n auto --alluredir=report_allure/{report_folder_name} " \
-                          f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests"
+                          f"--html=report_html/report_{report_folder_name}.html --self-contained-html tests/ui_testcases"
 
 # Test cases will run based on the amount of threads available
 parallel_api_run_command = f"pytest -s -n auto --alluredir=report_allure/{report_folder_name} " \
-                           f"--html=api_report_html/report_{report_folder_name}.html --self-contained-html api_tests"
+                           f"--html=api_report_html/report_{report_folder_name}.html --self-contained-html tests/api_testcases"
 
 if parallel == "yes" and test_item == "ui":
     subprocess.run(parallel_ui_run_command, shell=True)
