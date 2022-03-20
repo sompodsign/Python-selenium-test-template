@@ -88,8 +88,8 @@ elif test_item == "both":
 
 # send report if generated
 html_reports = get_html_reports(test_item)
-for report in html_reports:
-    send_report("sompod123@gmail.com", report)
+
+send_report("sompod123@gmail.com", html_reports)
 # if html_report:
 #     print("Sending report...")
 #     report = html_report
