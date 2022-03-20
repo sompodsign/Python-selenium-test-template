@@ -90,12 +90,6 @@ elif test_item == "both":
 html_reports = get_html_reports(test_item)
 
 send_report("sompod123@gmail.com", html_reports)
-# if html_report:
-#     print("Sending report...")
-#     report = html_report
-#     send_report("sompod123@gmail.com", report)
-# else:
-#     print("Something went wrong while generating html report.")
 
 # allure report serve
 # ui_allure_serve_command = f"allure serve reports/{test_item}_report_allure/{report_file_name_prefix}"

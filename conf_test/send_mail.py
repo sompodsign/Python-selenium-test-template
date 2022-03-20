@@ -1,6 +1,4 @@
 import smtplib
-from email import encoders
-from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
@@ -29,14 +27,6 @@ def send_report(receiver_email, reports):
     message['Subject'] = Header(mail_title, 'utf-8')
 
     message.attach(MIMEText(mail_body))
-
-    # build the attachment
-    # att1 = MIMEBase('application', 'octet-stream')
-    # att1.set_payload(open(htmlPath, 'rb').read())
-    #
-    # encoders.encode_base64(att1)
-    # att1.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(htmlPath))
-    # message.attach(att1)
 
     for report in reports:  # add files to the message
         filename = os.path.basename(report)
