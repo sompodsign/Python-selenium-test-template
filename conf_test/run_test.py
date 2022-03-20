@@ -8,7 +8,7 @@ from utils.json_utils import json_reader
 from utils.general_functions import read_date, read_time, get_html_reports
 from send_mail import send_report
 
-test_environment_type = json_reader("conf_test/configuration.json")['settings']["environmentType"]
+test_environment_type = json_reader("config.json")['settings']["environmentType"]
 configuration_data = read_data_from_excel("./test_data/{}_test_data.xlsx".format(test_environment_type),
                                           sheet_name="configuration")
 parallel = configuration_data["parallel_run"]

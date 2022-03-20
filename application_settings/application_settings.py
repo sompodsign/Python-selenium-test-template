@@ -11,7 +11,7 @@ class ApplicationSettings:
     browser_name = "chrome"
     image_folder_path = None
     start_time = datetime.datetime.now()
-    configuration_file_path = "./conf_test/configuration.json"
+    configuration_file_path = "./config.json"
 
     # Environment details
     environment_type = "qa"
