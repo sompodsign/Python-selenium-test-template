@@ -27,13 +27,14 @@ class DriverWaits:
         except Exception as e:
             print(e, "not found")
 
-    def wait_until_visible(self, wait_time, element):
+    def wait_until_visible(self, element, wait_time=30):
         """
         Wait until element is visible
         :param wait_time:
         :param element:
         :return:
         """
+        time.sleep(1)
         try:
             self.get_wait(wait_time).until(EC.visibility_of_element_located(element))
             return True
