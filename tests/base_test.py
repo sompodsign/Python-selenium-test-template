@@ -1,3 +1,9 @@
+"""
+  Base test class implementation.
+  Author: Shampad, Date: March 12, 2022
+"""
+
+
 import sys
 import os.path
 import unittest

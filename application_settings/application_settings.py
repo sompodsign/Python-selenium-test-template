@@ -1,3 +1,9 @@
+"""
+  Application Settings class implementation.
+  Author: Shampad, Date: March 13, 2022
+"""
+
+
 import datetime
 
 from utils.excel_utils import read_data_from_excel, read_data_from_excel_by_row
