@@ -32,6 +32,13 @@ class Browser:
     options.add_argument("--ignore-certificate-errors")
     options.add_argument("--disable-popup-blocking")
     options.add_argument("--disable-translate")
+    options.add_argument("--disable-notifications")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-application-cache")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--allow-insecure-localhost")
+    options.add_argument("--window-size=1280,800")
+
     options.experimental_options["prefs"] = {
         "logging.browser.enable": "false"}
 

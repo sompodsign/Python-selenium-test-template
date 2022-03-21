@@ -75,6 +75,7 @@ def individual_api_testcases_run():
     subprocess.run(individual_api_run_command, shell=True)
 
 
+# decide which mode to run the test cases
 if parallel == "yes" and test_item == "ui":
     parallel_ui_testcases_run()
 elif parallel == "yes" and test_item == "api":
@@ -89,8 +90,10 @@ elif test_item == "both":
 # send report if generated
 html_reports = get_html_reports(test_item)
 
-# uncomment this to send report
-# send_report("sompod123@gmail.com", html_reports, "Meta-Race")
+# send report to receivers email
+project_name = configuration_data["project_name"]
+report_receiver_email = configuration_data["report_receiver"]
+send_report(report_receiver_email, html_reports, project_name)
 
 # allure report serve
 # ui_allure_serve_command = f"allure serve reports/{test_item}_report_allure/{report_file_name_prefix}"

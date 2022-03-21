@@ -7,7 +7,7 @@ import datetime
 import os
 from datetime import datetime
 
-#TODO: receive project name as parameter
+
 def send_report(receiver_email, reports, project_name):
     sender = 'sompodsrkr@gmail.com'
     receiver = receiver_email
@@ -40,7 +40,7 @@ def send_report(receiver_email, reports, project_name):
         server.starttls()
         server.login("sompodsrkr@gmail.com", "4423445946644Ss")
         server.sendmail(sender, receiver, message.as_string())
-        print("Send email successfully!!!")
+        print(f"Sent report successfully to {receiver_email} !!!")
         server.close()
 
     except Exception as e:

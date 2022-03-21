@@ -1,5 +1,4 @@
 import allure
-# from loguru import logger
 
 from page_objects.base_page import BasePage
 from helper.driver_actions import DriverActions
