@@ -7,7 +7,6 @@ import datetime
 import os
 from datetime import datetime
 
-from dotenv import load_dotenv
 from dotenv import dotenv_values
 
 envs = dotenv_values('.env')
