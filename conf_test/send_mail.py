@@ -7,6 +7,11 @@ import datetime
 import os
 from datetime import datetime
 
+from dotenv import load_dotenv
+from dotenv import dotenv_values
+
+envs = dotenv_values('.env')
+
 
 def send_report(receiver_email, reports, project_name):
     sender = 'sompodsrkr@gmail.com'
@@ -34,11 +39,14 @@ def send_report(receiver_email, reports, project_name):
         attachment.add_header('Content-Disposition', 'attachment', filename=filename)
         message.attach(attachment)
 
+    print("Sending report...")
+    print("*" * 80)
+
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
-        server.login("sompodsrkr@gmail.com", "4423445946644Ss")
+        server.login(envs["email_address"], envs["email_password"])
         server.sendmail(sender, receiver, message.as_string())
         print(f"Sent report successfully to {receiver_email} !!!")
         server.close()
