@@ -11,3 +11,4 @@ class LoginPageLocators:
 
 class HomePageLocators:
     WELCOME_MESSAGE = (By.XPATH, "//h5[normalize-space()='Unidevgo Test']")
+    LOGO = (By.XPATH, "//div[@class='col-auto']//*[name()='svg']")

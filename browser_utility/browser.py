@@ -1,4 +1,5 @@
 from selenium import webdriver
+import allure
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import IEDriverManager
@@ -60,7 +61,9 @@ class Browser:
     def get_web_driver(self):
         return self.web_driver
 
+    @allure.step("Navigate to URL")
     def go_to_url(self):
+        print("Navigating to the webpage")
         self.web_driver.get(self.application_settings.get_test_url())
 
     def close_browser(self):

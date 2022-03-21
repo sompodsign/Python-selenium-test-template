@@ -15,7 +15,7 @@ class ApplicationSettings:
 
     # Environment details
     environment_type = "qa"
-    url = None
+    url = ''
     test_data_file_path = "./test_data/{}_test_data.xlsx".format(environment_type)
 
     def setUp(self, os="win", environment="qa"):
