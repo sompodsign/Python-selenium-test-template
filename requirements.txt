@@ -28,3 +28,4 @@ webdriver-manager==3.5.0
 requests
 ddt~=1.4.4
 pandas~=1.4.1
+loguru~=0.6.0

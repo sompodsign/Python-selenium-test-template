@@ -18,6 +18,7 @@ class HomePageTest(BaseTest):
         home_page.check_about_nav()
         home_page.check_signup_nav()
         home_page.check_connect_wallet_btn()
+        home_page.check_get_started_btn()
         home_page.check_join_text()
         home_page.check_buy_race_text()
         home_page.check_buttons_on_buy_courses_section()
