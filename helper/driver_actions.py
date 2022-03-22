@@ -409,3 +409,4 @@ class DriverActions:
             return self.get_wait().until(EC.visibility_of_element_located(element)).text
         except Exception as e:
             print("Text not found, ", e)
+

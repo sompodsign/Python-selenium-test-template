@@ -10,6 +10,9 @@ class LoginPageLocators:
 
 
 class HomePageLocators:
+
+    FAVICON = (By.XPATH, "//link[@rel='shortcut icon']")
+
     # TOP NAVIGATION
     LOGO = (By.XPATH, "//div[@class='col-auto']//*[name()='svg']")
     DOGS_MENU = (By.XPATH, "//a[normalize-space()='DOGS']")
@@ -22,7 +25,7 @@ class HomePageLocators:
     # HERO SECTION
     MAIN_HERO_TEXT = (By.XPATH, "//h1[normalize-space()='Make money by racing dogs']")
     SUB_HERO_TEXT = (By.XPATH, "//p[@class='sc-giYglK bDwXye']")
-    GET_STARTED_BTN = (By.XPATH, "//h1[normalize-space()='GET STARTED']") #er
+    GET_STARTED_BTN = (By.XPATH, "//button[normalize-space()='GET STARTED']")
     JOIN_AND_BUY_SECTION = (By.XPATH, "//div[@class='sc-ikJyIC ektmRX']")
     JOIN_TEXT = (By.XPATH, "//p[contains(text(),'time to bet on your favorite! Pimp your DOG$,')]")
     BUY_RACE_COURSES = (By.XPATH, "//div[@class='swiper-slide swiper-slide-active']//h3[@class='sc-hiCibw gYOHnn']["

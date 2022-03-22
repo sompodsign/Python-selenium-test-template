@@ -15,6 +15,15 @@ class HomePage(BasePage, DriverActions, DriverWaits):
         self.home_page_locator = HomePageLocators
         super().__init__(driver)
 
+    @allure.step("Checking the favicon of the page if visible")
+    def check_favicon(self):
+        try:
+            assert self.wait_until_visible(self.home_page_locator.FAVICON) is True
+            logger.info("Favicon is visible")
+            return True
+        except AssertionError:
+            logger.error("Favicon is not visible")
+
     @allure.step("Checking the logo is visible properly")
     def check_logo(self):
         try:
@@ -263,6 +272,7 @@ class HomePage(BasePage, DriverActions, DriverWaits):
         :return:
         """
         tests = [
+            self.check_favicon(),
             self.check_logo(),
             self.check_dogs_menu(),
             self.check_races_menu(),
