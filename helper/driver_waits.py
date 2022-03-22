@@ -34,7 +34,7 @@ class DriverWaits:
         :param element:
         :return:
         """
-        time.sleep(0.5)
+        time.sleep(0.2)
         try:
             self.get_wait(wait_time).until(EC.visibility_of_element_located(element))
             return True

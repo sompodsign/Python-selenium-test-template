@@ -23,6 +23,9 @@ class DriverActions:
     def find_element(self, *element):
         return self.driver.find_element(*element)
 
+    def find_elements(self, *element):
+        return self.driver.find_elements(*element)
+
     def browser_back(self):
         self.driver.back()
 
@@ -33,22 +36,6 @@ class DriverActions:
         except Exception as e:
             print("Element not found, ", e)
             return False
-
-    # def click_on_web_element_with_actions_class(self, element, retry=1):
-    #     sleep_amount = 0
-    #     if retry > 1:
-    #         sleep_amount = 1
-    #     for _ in range(retry):
-    #         time.sleep(sleep_amount)
-    #         actions = ActionChains(self.driver)
-    #         assert self.scroll_to_web_element_with_javascript(element) is True, "Unable to scroll to element"
-    #         try:
-    #             actions.move_to_element(self.get_wait(2)
-    #                                     .until(EC.element_to_be_clickable(element))).click().perform()
-    #             return True
-    #         except Exception as e:
-    #             print("Element not found, ", e)
-    #             return False
 
     def click_on_web_element_with_actions_class(self, element):
 
@@ -385,3 +372,40 @@ class DriverActions:
     # scroll page to amount of pages
     def scroll_page_to_amount(self, amount):
         self.driver.execute_script("window.scrollBy(0, " + str(amount) + ");")
+
+    def check_tab_title(self, title):
+        """
+        This method will check tab title
+        :param title:
+        :return:
+        """
+        try:
+            driver_title = self.driver.title
+            return driver_title == title
+        except Exception as e:
+            print("Title not found, ", e)
+            return False
+
+    def get_attribute_value(self, element, attribute):
+        """
+        This method will get attribute
+        :param element:
+        :param attribute:
+        :return:
+        """
+        try:
+            return self.find_element(*element).get_attribute(attribute)
+        except Exception as e:
+            print("Attribute not found, ", e)
+            return False
+
+    def get_element_text(self, element):
+        """
+        This method will get element text
+        :param element:
+        :return:
+        """
+        try:
+            return self.get_wait().until(EC.visibility_of_element_located(element)).text
+        except Exception as e:
+            print("Text not found, ", e)

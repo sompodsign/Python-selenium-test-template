@@ -45,5 +45,12 @@ class HomePageLocators:
     # Subscribe Section
     SUBSCRIBE_NOW_TEXT = (By.XPATH, "//h3[normalize-space()='SUBSCRIBE NOW']")
     JOIN_META_DOG_TEXT = (By.XPATH, "//h2[normalize-space()='Join Metadog Race community!']")
-    SUBSCRIBE_EMAIL_INPUT_FIELD = (By.XPATH, "//h2[normalize-space()='Join Metadog Race community!']//parent::div/following-sibling::div//form//input")
+    SUBSCRIBE_EMAIL_INPUT_FIELD = (
+    By.XPATH, "//h2[normalize-space()='Join Metadog Race community!']//parent::div/following-sibling::div//form//input")
     SUBSCRIBE_BTN = (By.XPATH, "//button[normalize-space()='SUBSCRIBE']")
+
+    # footer section
+    FOOTER_LOGO = (
+    By.XPATH, "(((//div[@class='sc-hGPBjI bQZxYx']//parent::div//parent::div)[1]//child::div[1])[1]//*)[1]")
+    FOOTER_MENU_ITEMS = (By.XPATH, "//div[@class='sc-hGPBjI bQZxYx']//div")
+    COPYRIGHT_TEXT = (By.XPATH, "//p[@class='sc-cxpSdN cVpCsr']")
