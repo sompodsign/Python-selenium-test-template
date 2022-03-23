@@ -34,6 +34,7 @@ def get_html_reports(report_type):
         try:
             report1 = os.path.abspath(glob.glob(f"reports/api_report_html/*.html")[-1])
             report2 = os.path.abspath(glob.glob(f"reports/ui_report_html/*.html")[-1])
+            # logs = os.path.abspath(glob.glob("logs/*.log")) # get logs
             reports.append(report1)
             reports.append(report2)
         except Exception as e:
