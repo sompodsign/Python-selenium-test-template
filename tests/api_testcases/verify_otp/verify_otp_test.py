@@ -1,11 +1,8 @@
-import time
 import allure
 
-from api_test_data.verify_email.data import email
-from api_test_data.otp.data import get_otp, invalid_otp
-from api.verify_otp_api import VerifyOtpApi
-from api.verify_email_api import VerifyEmailApi
-from api_test_data.headers import headers_with_token
+from test_data.api_test_data.otp import invalid_otp
+from application_settings.api import VerifyOtpApi
+from test_data.api_test_data import headers_with_token
 
 
 # @allure.step("This test verifies that OTP validation works properly")

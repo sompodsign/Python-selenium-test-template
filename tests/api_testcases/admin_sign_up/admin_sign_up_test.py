@@ -1,10 +1,10 @@
 import allure
-from api_test_data.admin_sign_up.data import new_admin, new_admin_existing_email, \
+from test_data.api_test_data.admin_sign_up.data import new_admin, new_admin_existing_email, \
     new_admin_existing_username, \
     new_admin_without_username, \
     new_admin_without_email, \
     new_admin_without_password
-from api.user_api import UserApi
+from application_settings.api import UserApi
 
 
 @allure.step('This test verifies that users can sign up as a_admin.')

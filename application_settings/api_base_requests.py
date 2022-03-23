@@ -1,6 +1,6 @@
 import requests
 import json
-from api.config import constData
+from application_settings.application_settings import ApplicationSettings
 
 
 class BaseApi(object):
@@ -8,10 +8,12 @@ class BaseApi(object):
     this Base api class is serving basic attributes for every single api page inherited from this class
 
     """
+    application_settings = ApplicationSettings()
+    base_url = application_settings.get_api_base_url()
     HEADERS = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
     def __init__(self, url):
-        self.url = constData['BASE_API_URL'] + url
+        self.url = self.base_url + url
 
     def get_request(self, payload=None, headers=None):
         if headers is None:

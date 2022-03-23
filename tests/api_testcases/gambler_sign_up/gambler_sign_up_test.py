@@ -1,10 +1,10 @@
 import allure
-from api_test_data.gambler_sign_up.data import new_gambler, new_gambler_existing_email, \
+from test_data.api_test_data import new_gambler, new_gambler_existing_email, \
     new_gambler_existing_username, \
     new_gambler_without_username, \
     new_gambler_without_email, \
     new_gambler_without_password
-from api.user_api import UserApi
+from application_settings.api import UserApi
 
 
 @allure.step('This test verifies that users can sign up as a gambler.')

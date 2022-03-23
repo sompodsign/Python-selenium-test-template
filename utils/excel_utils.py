@@ -2,7 +2,7 @@ import openpyxl
 import pandas as pd
 
 
-def read_data_from_excel(file, sheet_name):
+def read_configuration_data_from_excel(file, sheet_name="configuration"):
     df = pd.read_excel(file, sheet_name)
     return df.to_dict(orient="records")[0]
 

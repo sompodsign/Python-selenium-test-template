@@ -1,7 +1,7 @@
 
 import allure
-from api_test_data.verify_email.data import email, invalid_email, non_registered_email
-from api.verify_email_api import VerifyEmailApi
+from test_data.api_test_data.verify_email.data import email, invalid_email, non_registered_email
+from application_settings.api import VerifyEmailApi
 
 
 @allure.step('This test verifies that email verification sends OTP to email')

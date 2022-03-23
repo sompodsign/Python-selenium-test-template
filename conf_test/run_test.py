@@ -3,14 +3,14 @@ import sys
 import os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from utils.excel_utils import read_data_from_excel
+from utils.excel_utils import read_configuration_data_from_excel
 from utils.json_utils import json_reader
 from utils.general_functions import read_date, read_time, get_html_reports
 from send_mail import send_report
 
 test_environment_type = json_reader("config.json")['settings']["environmentType"]
-configuration_data = read_data_from_excel("./test_data/{}_test_data.xlsx".format(test_environment_type),
-                                          sheet_name="configuration")
+configuration_data = read_configuration_data_from_excel("./test_data/{}_test_data.xlsx".format(test_environment_type))
+
 parallel = configuration_data["parallel_run"]
 test_item = configuration_data["test_item"].casefold()
 

@@ -9,14 +9,14 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from application_settings.application_settings import ApplicationSettings
 from utils.json_utils import json_reader
-from utils.excel_utils import read_data_from_excel
+from utils.excel_utils import read_configuration_data_from_excel
 
 
 class Browser:
     web_driver = webdriver
     application_settings = ApplicationSettings()
     data = json_reader(application_settings.get_configuration_file_path())
-    configuration_data = read_data_from_excel(application_settings.get_test_data_file_path(), sheet_name="configuration")
+    configuration_data = read_configuration_data_from_excel(application_settings.get_test_data_file_path(), sheet_name="configuration")
     headless = "headless" if configuration_data["headless"] == "yes" else "headful"
 
     environment = data['settings']['environmentType']
