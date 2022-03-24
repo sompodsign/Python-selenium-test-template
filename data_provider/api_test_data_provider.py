@@ -5,7 +5,6 @@ from collections import defaultdict
 
 
 class ApiTestDataProvider:
-
     login_data = load_json("login_data.json")
     existing_email = "unidevgo.qa3@gmail.com"
     existing_username = "unidevgo.qa3"
@@ -13,6 +12,19 @@ class ApiTestDataProvider:
 
     def get_valid_sign_in_data(self):
         return self.login_data["valid_login_data"]
+
+    def get_registered_email(self):
+        return self.login_data["valid_login_data"]["email"]
+
+    def get_email_for_otp_send(self):
+        return {"email": self.get_registered_email()}
+
+    def get_non_registered_email_object_for_otp_send(self):
+        return {"email": self.get_new_email()}
+
+    @staticmethod
+    def get_invalid_email_object_for_otp_send():
+        return {"email": "invalid_email"}
 
     def get_sign_in_data_without_email(self):
         return self.login_data["no_email_data"]
@@ -151,3 +163,6 @@ class ApiTestDataProvider:
     def get_invalid_email():
         return "testemailgamil.com"
 
+
+a = ApiTestDataProvider()
+print(a.get_registered_email())

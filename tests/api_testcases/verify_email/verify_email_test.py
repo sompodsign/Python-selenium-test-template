@@ -1,28 +1,46 @@
-#
-# import allure
-# from test_data.api_test_data.verify_email.data import email, invalid_email, non_registered_email
-# from application_settings.api import VerifyEmailApi
-#
-#
-# @allure.step('This test verifies that email verification sends OTP to email')
-# def test_successful_player_sign_up():
-#     verify_api = VerifyEmailApi("/auth/api/verify/email")
-#     result = verify_api.send_otp(email)
-#     response = result["status_code"]
-#     assert response == 201
-#
-#
-# @allure.step('This test verifies that OTP does not send to non registered email')
-# def test_unsuccessful_otp_send_to_non_registered_email():
-#     verify_api = VerifyEmailApi("/auth/api/verify/email")
-#     result = verify_api.send_otp(non_registered_email)
-#     response = result["status_code"]
-#     assert response == 400
-#
-#
-# @allure.step('This test verifies that OTP does not send to an invalid email')
-# def test_unsuccessful_otp_send_to_invalid_email():
-#     verify_api = VerifyEmailApi("/auth/api/verify/email")
-#     result = verify_api.send_otp(invalid_email)
-#     response = result["status_code"]
-#     assert response == 400
+import allure
+from application_settings.api_application_settings import ApiTestApplicationSettingsProvider
+from data_provider.api_test_data_provider import ApiTestDataProvider
+from utils.logger import CustomLogger
+
+logger = CustomLogger('api_test').get_logger()
+
+
+class TestVerifyEmail(ApiTestDataProvider):
+    verify_api = ApiTestApplicationSettingsProvider('/auth/api/verify/email')
+
+    @allure.step('This test verifies that email verification sends OTP to email')
+    def test_successful_player_sign_up(self):
+        result = self.verify_api.post_request(self.get_email_for_otp_send())
+        response = result["status_code"]
+        try:
+            assert response == 201
+            assert result["response"]["message"] == 'Otp successfully sent to your mail '
+            logger.info('Otp successfully sent to your registered email address')
+        except AssertionError:
+            logger.error('Otp not sent to your mail ')
+            raise AssertionError
+
+    @allure.step('This test verifies that OTP does not send to non registered email')
+    def test_unsuccessful_otp_send_to_non_registered_email(self):
+        result = self.verify_api.post_request(self.get_non_registered_email_object_for_otp_send())
+        response = result["status_code"]
+        try:
+            assert response == 400
+            assert result["response"]["message"] == 'Could not find your Account'
+            logger.info('Email not registered so OTP not sent')
+        except AssertionError:
+            logger.error('OTP sent to non registered email')
+            raise AssertionError
+
+    @allure.step('This test verifies that OTP does not send to an invalid email')
+    def test_unsuccessful_otp_send_to_invalid_email(self):
+        result = self.verify_api.post_request(self.get_invalid_email_object_for_otp_send())
+        response = result["status_code"]
+        try:
+            assert response == 400
+            assert result["response"]["message"] == 'Could not find your Account'
+            logger.info('OTP not sent to invalid email')
+        except AssertionError:
+            logger.error('OTP sent to invalid email')
+            raise AssertionError
