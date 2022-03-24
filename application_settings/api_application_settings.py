@@ -1,5 +1,5 @@
 from .api_base_requests import BaseApi
-from test_data.api_test_data_provider import ApiTestDataProvider
+from data_provider.api_test_data_provider import ApiTestDataProvider
 
 
 class ApiTestApplicationSettingsProvider(BaseApi, ApiTestDataProvider):

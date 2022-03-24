@@ -1,8 +1,11 @@
-import datetime
+
 from loguru import logger
 
 
 class CustomLogger:
+    """
+    Custom logger class to be used in the project to get beautiful logs for every steps on tests.
+    """
 
     def __init__(self, log_file_name):
         self.logger = logger
@@ -10,3 +13,9 @@ class CustomLogger:
 
     def get_logger(self):
         return self.logger
+
+    # def info(self, message):
+    #     return self.logger.info("✔ " + message)
+    #
+    # def error(self, message):
+    #     return self.logger.error("✘ " + message)
