@@ -20,7 +20,7 @@ class ApiTestDataProvider:
         return {"email": self.get_registered_email()}
 
     def get_non_registered_email_object_for_otp_send(self):
-        return {"email": self.get_new_email()}
+        return {"email": self.get_registered_email()}
 
     @staticmethod
     def get_invalid_email_object_for_otp_send():

@@ -12,7 +12,7 @@ class ApiTestApplicationSettingsProvider(BaseApi, ApiTestDataProvider):
 
     def get_user_token(self):
         response = self.post_request(payload=self.get_valid_sign_in_data())
-        return response.json()['accessToken']
+        return response['response']['data']
 
     def get_admin_token(self):
         response = self.post_request(payload={})
@@ -36,4 +36,3 @@ class ApiTestApplicationSettingsProvider(BaseApi, ApiTestDataProvider):
     def current_user_id(self):
         response = self.post_request(payload={})
         return response.json()['userId']
-
