@@ -1,3 +1,4 @@
+from application_settings.api_base_requests import BaseApi
 from utils.email_reader import get_otp_from_email
 from utils.json_utils import load_json
 from utils.general_functions import get_raw_time
@@ -9,11 +10,40 @@ class ApiTestDataProvider:
     existing_email = "unidevgo.qa3@gmail.com"
     existing_username = "unidevgo.qa3"
     existing_password = "5946644S"
+    auth_api = BaseApi("/auth/api/login")
+
+    def get_user_token(self):
+
+        response = self.auth_api.post_request(payload=self.get_user_sign_in_data())
+        return response['response']['accessToken']
+
+    def get_admin_token(self):
+        response = self.auth_api.post_request(payload={})
+        return response.json()['accessToken']
+
+    def get_headers_with_user_token(self):
+        headers_with_user_token = {'Authorization': self.get_user_token(), 'Content-Type': 'application/json',
+                                   'Accept': 'application/json'}
+        return headers_with_user_token
+
+    def get_headers_with_admin_token(self):
+        headers_with_admin_token = {'Authorization': self.get_admin_token(), 'Content-Type': 'application/json',
+                                    'Accept': 'application/json'}
+        return headers_with_admin_token
+
+    @staticmethod
+    def get_headers():
+        headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+        return headers
+
+    def current_user_id(self):
+        response = self.auth_api.post_request(payload=self.get_user_sign_in_data())
+        return response.json()['userId']
 
     def get_valid_sign_in_password(self):
         return self.login_data["valid_login_data"]["password"]
 
-    def get_valid_sign_in_data(self):
+    def get_user_sign_in_data(self):
         return {"email": self.login_data["valid_login_data"]["email"], "password": self.get_valid_sign_in_password()}
 
     def get_registered_email(self):

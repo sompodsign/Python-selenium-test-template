@@ -11,7 +11,7 @@ class ApiTestApplicationSettingsProvider(BaseApi, ApiTestDataProvider):
         super().__init__(endpoint)
 
     def get_user_token(self):
-        response = self.post_request(payload=self.get_valid_sign_in_data())
+        response = self.post_request(payload=self.get_user_sign_in_data())
         return response['response']['data']
 
     def get_admin_token(self):

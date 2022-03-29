@@ -12,7 +12,7 @@ class TestUserLogin(ApiTestDataProvider):
 
     @allure.step('Successful user login_test with valid data test')
     def test_valid_signin(self):
-        result = self.user_api.post_request(payload=self.get_valid_sign_in_data())
+        result = self.user_api.post_request(payload=self.get_user_sign_in_data())
         status_code = result['status_code']
         try:
             assert status_code == 201
