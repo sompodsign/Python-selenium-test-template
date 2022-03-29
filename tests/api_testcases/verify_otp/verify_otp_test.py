@@ -12,26 +12,26 @@ class TestVerifyEmail(ApiTestDataProvider):
     verify_otp_api = ApiTestApplicationSettingsProvider('/auth/api/verify/otp')
     verify_email_api = ApiTestApplicationSettingsProvider('/auth/api/verify/email')
 
-    @allure.step("This test verifies that OTP validation works properly")
-    def test_successful_otp_verification(self):
-        email_result = self.verify_email_api.post_request(payload=self.get_email_for_otp_send())
-        email_response = email_result["status_code"]
-        assert email_response == 201
-        logger.info("Please wait a while for the email to be sent")
-        time.sleep(40)
-        otp = self.get_otp()
-        headers = self.verify_email_api.get_headers()
-        headers["Authorization"] = "Bearer " + email_result["response"]["data"]
-        otp_response = self.verify_otp_api.post_request(payload={"otp": otp}, headers=headers)
-        response = otp_response['status_code']
-        try:
-            assert response == 201
-            assert otp_response['response']['message'] == 'Otp verified successfully '
-            assert otp_response['response']['success'] is True
-            logger.info("OTP verification successful")
-        except AssertionError:
-            logger.error("OTP verification failed")
-            raise AssertionError
+    # @allure.step("This test verifies that OTP validation works properly")
+    # def test_successful_otp_verification(self):
+    #     email_result = self.verify_email_api.post_request(payload=self.get_email_for_otp_send())
+    #     email_response = email_result["status_code"]
+    #     assert email_response == 201
+    #     logger.info("Please wait a while for the email to be sent")
+    #     time.sleep(40)
+    #     otp = self.get_otp()
+    #     headers = self.verify_email_api.get_headers()
+    #     headers["Authorization"] = "Bearer " + email_result["response"]["data"]
+    #     otp_response = self.verify_otp_api.post_request(payload={"otp": otp}, headers=headers)
+    #     response = otp_response['status_code']
+    #     try:
+    #         assert response == 201
+    #         assert otp_response['response']['message'] == 'Otp verified successfully '
+    #         assert otp_response['response']['success'] is True
+    #         logger.info("OTP verification successful")
+    #     except AssertionError:
+    #         logger.error("OTP verification failed")
+    #         raise AssertionError
 
     @allure.step("THis test verifies that OTP can't be validated with invalid code")
     def test_otp_verification_with_invalid_otp(self):
