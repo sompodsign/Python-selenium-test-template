@@ -10,17 +10,23 @@ class ApiTestDataProvider:
     existing_username = "unidevgo.qa3"
     existing_password = "5946644S"
 
+    def get_valid_sign_in_password(self):
+        return self.login_data["valid_login_data"]["password"]
+
     def get_valid_sign_in_data(self):
-        return self.login_data["valid_login_data"]
+        return {"email": self.login_data["valid_login_data"]["email"], "password": self.get_valid_sign_in_password()}
 
     def get_registered_email(self):
         return self.login_data["valid_login_data"]["email"]
 
+    def get_registered_password(self):
+        return self.login_data["valid_login_data"]["password"]
+
     def get_email_for_otp_send(self):
-        return {"email": self.get_registered_email()}
+        return {"email": self.get_existing_email()}
 
     def get_non_registered_email_object_for_otp_send(self):
-        return {"email": self.get_registered_email()}
+        return {"email": self.get_existing_email()}
 
     @staticmethod
     def get_invalid_email_object_for_otp_send():
@@ -89,6 +95,9 @@ class ApiTestDataProvider:
     def get_existing_email(self):
         return self.existing_email
 
+    def get_existing_email_object(self):
+        return {"email": self.existing_email}
+
     def get_new_valid_register_data(self):
         return {
             "username": self.get_new_username(),
@@ -153,11 +162,11 @@ class ApiTestDataProvider:
         }
 
     def get_otp(self):
-        return get_otp_from_email({"email": self.existing_email, "password": self.existing_password})
+        return get_otp_from_email({"email": self.get_existing_email(), "password": self.existing_password})
 
     @staticmethod
     def get_invalid_otp():
-        return "1234"
+        return {"otp": "1234"}
 
     @staticmethod
     def get_invalid_email():
