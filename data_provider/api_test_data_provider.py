@@ -1,9 +1,14 @@
+import datetime
+import random
+
+import pytz
+from randomuser import RandomUser
+from uuid import uuid4
 from application_settings.api_base_requests import BaseApi
 from utils.email_reader import get_otp_from_email
 from utils.json_utils import load_json
 from utils.general_functions import get_raw_time
 from collections import defaultdict
-
 
 class ApiTestDataProvider:
     login_data = load_json("login_data.json")
@@ -11,6 +16,7 @@ class ApiTestDataProvider:
     existing_username = "unidevgo.qa3"
     existing_password = "5946644S"
     auth_api = BaseApi("/auth/api/login")
+
 
     def get_user_token(self):
 
@@ -30,6 +36,42 @@ class ApiTestDataProvider:
         headers_with_admin_token = {'Authorization': self.get_admin_token(), 'Content-Type': 'application/json',
                                     'Accept': 'application/json'}
         return headers_with_admin_token
+
+    @staticmethod
+    def get_random_first_name():
+        return RandomUser().get_first_name()
+
+    @staticmethod
+    def get_random_last_name():
+        return RandomUser().get_last_name()
+
+    @staticmethod
+    def get_full_name():
+        return RandomUser().get_full_name()
+
+    @staticmethod
+    def get_city():
+        return RandomUser().get_city()
+
+    @staticmethod
+    def get_age():
+        return RandomUser().get_age()
+
+    @staticmethod
+    def get_weight():
+        return random.choice(range(1, 100))
+
+    @staticmethod
+    def get_random_number():
+        return random.randint(1, 10)
+
+    @staticmethod
+    def get_random_id():
+        return str(uuid4())
+
+    @staticmethod
+    def get_sex():
+        return random.choice(["Male", "Female"])
 
     @staticmethod
     def get_headers():
@@ -202,6 +244,7 @@ class ApiTestDataProvider:
     def get_invalid_email():
         return "testemailgamil.com"
 
-
-a = ApiTestDataProvider()
-print(a.get_registered_email())
+    @staticmethod
+    def get_random_time():
+        time_now = datetime.datetime.now(tz=pytz.timezone("Asia/Dhaka"))
+        return str(time_now + datetime.timedelta(days=3))

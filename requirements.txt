@@ -30,3 +30,4 @@ ddt~=1.4.4
 pandas~=1.4.1
 loguru~=0.6.0
 python-dotenv~=0.19.2
+randomuser~=1.6
