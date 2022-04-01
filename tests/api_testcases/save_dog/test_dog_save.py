@@ -145,3 +145,16 @@ class TestSaveDog(GameData):
         except AssertionError as e:
             logger.error(f"Dog is saved without matchId: {e}")
             raise AssertionError
+
+    @allure.step("Delete dog success test")
+    def test_dog_delete(self):
+        result = self.dog_api.post_request(self.get_new_dog_data())
+        dog_id = result['response']['id']
+        dog_delete_api = ApiTestApplicationSettingsProvider('/game/api/dog/{}'.format(dog_id))
+        delete_result = dog_delete_api.delete_request()
+        try:
+            assert delete_result['status_code'] == 200
+            assert delete_result['response']['message'] == 'Dog deleted successfully'
+            logger.info("Dog deleted successfully")
+        except Exception as e:
+            logger.error("Dog not deleted", e)
