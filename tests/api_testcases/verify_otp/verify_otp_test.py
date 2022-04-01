@@ -4,6 +4,7 @@ import allure
 from application_settings.api_application_settings import ApiTestApplicationSettingsProvider
 from data_provider.api_test_data_provider import ApiTestDataProvider
 from utils.logger import CustomLogger
+import pytest
 
 logger = CustomLogger('api_test').get_logger()
 
@@ -13,6 +14,7 @@ class TestVerifyEmail(ApiTestDataProvider):
     verify_email_api = ApiTestApplicationSettingsProvider('/auth/api/verify/email')
 
     @allure.step("This test verifies that OTP validation works properly")
+    @pytest.mark.skip
     def test_successful_otp_verification(self):
         email_result = self.verify_email_api.post_request(payload=self.get_email_for_otp_send())
         email_response = email_result["status_code"]

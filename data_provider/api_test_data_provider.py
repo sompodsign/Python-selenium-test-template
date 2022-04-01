@@ -10,13 +10,13 @@ from utils.json_utils import load_json
 from utils.general_functions import get_raw_time
 from collections import defaultdict
 
+
 class ApiTestDataProvider:
     login_data = load_json("login_data.json")
     existing_email = "unidevgo.qa3@gmail.com"
     existing_username = "unidevgo.qa3"
     existing_password = "5946644S"
     auth_api = BaseApi("/auth/api/login")
-
 
     def get_user_token(self):
 
@@ -98,7 +98,7 @@ class ApiTestDataProvider:
         return {"email": self.get_existing_email()}
 
     def get_non_registered_email_object_for_otp_send(self):
-        return {"email": self.get_existing_email()}
+        return {"email": self.get_new_email()}
 
     @staticmethod
     def get_invalid_email_object_for_otp_send():

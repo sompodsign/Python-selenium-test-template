@@ -7,11 +7,13 @@ logger = CustomLogger('api_test').get_logger()
 
 
 class TestSaveDog(GameData):
-
+    # race_api = ApiTestApplicationSettingsProvider('/game/api/race')
     dog_api = ApiTestApplicationSettingsProvider('/game/api/dog')
 
     @allure.step('Successful dog saving with right details')
     def test_dog_save(self):
+        # races = self.race_api.get_request()
+        # match_id = races['response']['races'][-1]['_id']
         result = self.dog_api.post_request(self.get_new_dog_data())
         status_code = result['status_code']
         try:

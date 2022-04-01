@@ -1,9 +1,13 @@
+from application_settings.api_base_requests import BaseApi
 from data_provider.api_test_data_provider import ApiTestDataProvider
 
 
 class GameData(ApiTestDataProvider):
+    race_api = BaseApi('/game/api/race')
 
     def get_new_dog_data(self):
+        races = self.race_api.get_request()
+        match_id = races['response']['races'][-1]['_id']
 
         return {
             "name": self.get_full_name(),
@@ -17,7 +21,7 @@ class GameData(ApiTestDataProvider):
             "reactionTime": self.get_random_number(),
             "mainWeather": self.get_random_number(),
             "sex": self.get_sex(),
-            "matchId": self.get_random_id(),
+            "matchId": match_id,
         }
 
     def get_new_dog_data_without_name(self):

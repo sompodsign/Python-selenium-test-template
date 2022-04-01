@@ -1,4 +1,6 @@
 import allure
+import pytest
+
 from application_settings.api_application_settings import ApiTestApplicationSettingsProvider
 from test_data.api_test_data.game_api_data import GameData
 from utils.logger import CustomLogger
@@ -6,11 +8,12 @@ from utils.logger import CustomLogger
 logger = CustomLogger('api_test').get_logger()
 
 
+@pytest.mark.one
 class TestSaveRace(GameData):
-
     api = ApiTestApplicationSettingsProvider('/game/api/race')
 
     @allure.step('Successful save race')
+    @pytest.mark.skip
     def test_save_race(self):
         result = self.api.post_request(self.get_new_race_data())
         try:
@@ -80,7 +83,7 @@ class TestSaveRace(GameData):
     def test_save_race_with_put_request(self):
         result = self.api.put_request(self.get_new_race_data())
         try:
-            assert result['status_code'] == 400
+            assert result['status_code'] == 404
             logger.info("Race not saved with put request")
         except Exception as e:
             logger.error(f"Race Saving failed with put request {e}")
