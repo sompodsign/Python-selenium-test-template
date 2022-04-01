@@ -32,8 +32,8 @@ def get_html_reports(report_type):
             print("Report not ready, Error", e)
     else:
         try:
-            report1 = os.path.abspath(glob.glob(f"reports/api_report_html/*.html")[-1])
-            report2 = os.path.abspath(glob.glob(f"reports/ui_report_html/*.html")[-1])
+            report1 = os.path.abspath(glob.glob(f"reports/api_report_html/*.html")[0])
+            report2 = os.path.abspath(glob.glob(f"reports/ui_report_html/*.html")[0])
             # logs = os.path.abspath(glob.glob("logs/*.log")) # get logs
             reports.append(report1)
             reports.append(report2)

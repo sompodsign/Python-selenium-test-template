@@ -18,7 +18,7 @@ class TestSaveDog(GameData):
         status_code = result['status_code']
         try:
             assert status_code == 201
-            assert result['response']['message'] == 'Dog Saved successfully'
+            assert 'Dog Saved successfully' in result['response']['message']
             assert result['response']['success'] is True
             logger.info('Dog Saved successfully')
         except AssertionError as e:

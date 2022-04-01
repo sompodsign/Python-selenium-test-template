@@ -27,7 +27,7 @@ class TestNextMatch:
         status_code = result['status_code']
         try:
             assert status_code == 400
-            assert result['response']['message'] == ['matchId should not be empty', 'first should not be empty', 'second should not be empty', 'third should not be empty', 'fourth should not be empty', 'fifth should not be empty', 'sixth should not be empty', 'seventh should not be empty', 'eighth should not be empty']
+            assert result['response']['message'] == ['matchId should not be empty', 'dogs must be an array', 'dogs should not be empty']
             logger.info('Next match not retrieved successfully with post request')
         except AssertionError as e:
             logger.error(f"Next match not retrieved successfully with post request: {e}")
@@ -38,8 +38,8 @@ class TestNextMatch:
         result = self.api.put_request()
         status_code = result['status_code']
         try:
-            assert status_code == 400
-            assert result['response']['message'] == ['matchId should not be empty', 'first should not be empty', 'second should not be empty', 'third should not be empty', 'fourth should not be empty', 'fifth should not be empty', 'sixth should not be empty', 'seventh should not be empty', 'eighth should not be empty']
+            assert status_code == 404
+            assert result['response']['message'] == 'Cannot PUT /game/api/match'
             logger.info('Next match not retrieved successfully with put request')
         except AssertionError as e:
             logger.error(f"Next match not retrieved successfully with put request: {e}")
@@ -50,8 +50,8 @@ class TestNextMatch:
         result = self.api.delete_request()
         status_code = result['status_code']
         try:
-            assert status_code == 400
-            assert result['response']['message'] == ['matchId should not be empty', 'first should not be empty', 'second should not be empty', 'third should not be empty', 'fourth should not be empty', 'fifth should not be empty', 'sixth should not be empty', 'seventh should not be empty', 'eighth should not be empty']
+            assert status_code == 404
+            assert result['response']['message'] == 'Cannot DELETE /game/api/match'
             logger.info('Next match not retrieved successfully with delete request')
         except AssertionError as e:
             logger.error(f"Next match not retrieved successfully with delete request: {e}")

@@ -90,10 +90,11 @@ elif test_item == "both":
 # send report if generated
 html_reports = get_html_reports(test_item)
 
+#TODO: issue on report collecting
 # send report to receivers email
 project_name = configuration_data["project_name"]
 report_receiver_email = configuration_data["report_receiver"]
-send_report(report_receiver_email, html_reports, project_name)
+# send_report(report_receiver_email, html_reports, project_name)
 
 # allure report serve
 # ui_allure_serve_command = f"allure serve reports/{test_item}_report_allure/{report_file_name_prefix}"
